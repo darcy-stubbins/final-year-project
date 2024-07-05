@@ -24,16 +24,23 @@ class _LoginState extends State<Login> {
             child: Card(
               margin: const EdgeInsets.all(20.0),
               child: Container(
-                margin: const EdgeInsets.all(20.0),
+                margin: const EdgeInsets.all(10.0),
                 child: Column(
                   children: <Widget>[
-                    const ListTile(
-                      title: Text('Welcome!'),
-                      subtitle: Text('Login to your account below'),
+                    ListTile(
+                      title: Text(
+                        'Welcome!',
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                      subtitle: Text(
+                        'Login to your account below',
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
                     ),
                     TextFormField(
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         hintText: 'Enter your email',
+                        hintStyle: Theme.of(context).textTheme.labelLarge,
                       ),
                       validator: (String? value) {
                         if (value == null || value.isEmpty) {
@@ -43,8 +50,9 @@ class _LoginState extends State<Login> {
                       },
                     ),
                     TextFormField(
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         hintText: 'Enter your password',
+                        hintStyle: Theme.of(context).textTheme.labelLarge,
                       ),
                       validator: (String? value) {
                         if (value == null || value.isEmpty) {
@@ -55,28 +63,37 @@ class _LoginState extends State<Login> {
                     ),
                     Row(
                       children: <Widget>[
-                        TextButton(
-                          onPressed: () {
-                            Core.getInstance().login();
-                          },
-                          child: const Text('Submit'),
+                        Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: FilledButton(
+                            onPressed: () {
+                              Core.getInstance().login();
+                            },
+                            child: const Text('Submit'),
+                          ),
                         ),
-                        TextButton(
-                          onPressed: () {},
-                          child: const Text('Forgot password?'),
+                        Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: FilledButton(
+                            onPressed: () {},
+                            child: const Text('Forgot password?'),
+                          ),
                         ),
                       ],
                     ),
                     Row(
                       children: <Widget>[
-                        TextButton(
-                          onPressed: () {
-                            setState(() {
-                              Core.getInstance().changeLoginRoutePageIndex(1);
-                            });
-                          },
-                          child:
-                              const Text('Or you can create an account here'),
+                        Padding(
+                          padding: EdgeInsets.all(1.0),
+                          child: FilledButton(
+                            onPressed: () {
+                              setState(() {
+                                Core.getInstance().changeLoginRoutePageIndex(1);
+                              });
+                            },
+                            child:
+                                const Text('Or you can create an account here'),
+                          ),
                         ),
                       ],
                     )

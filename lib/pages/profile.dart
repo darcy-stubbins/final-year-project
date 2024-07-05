@@ -12,41 +12,65 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profile'),
+        backgroundColor: Colors.transparent,
+        title:
+            Text('Edit profile', style: Theme.of(context).textTheme.titleLarge),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 50.0, top: 10.0, right: 50.0, bottom: 10.0),
-              child: Image.asset('assets/images/placeholder.jpg'),
-            ),
-          ),
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: TextFormField(
-                decoration: const InputDecoration(
-                  hintText: 'Name',
+      body: Card(
+        margin: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Center(
+              child: Container(
+                height: 300,
+                width: 350,
+                padding: const EdgeInsets.only(
+                    left: 50.0, top: 10.0, right: 50.0, bottom: 10.0),
+                child: Image.asset(
+                  'assets/images/placeholder.jpg',
+                  fit: BoxFit.fill,
                 ),
-                validator: (String? value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter some text';
-                  }
-                  return null;
-                },
               ),
             ),
-          ),
-          Center(
-            child: TextButton(
-              onPressed: () {},
-              child: const Text('Save changes'),
+            Center(
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 10.0),
+                child: FilledButton(
+                  onPressed: () {},
+                  child: const Text('Select new profile picture'),
+                ),
+              ),
             ),
-          ),
-        ],
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    hintText: 'Update Name',
+                    hintStyle: Theme.of(context).textTheme.labelLarge,
+                  ),
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+            ),
+            Center(
+              child: Padding(
+                padding: EdgeInsets.all(10.0),
+                child: FilledButton(
+                  onPressed: () {},
+                  child: const Text('Save changes'),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

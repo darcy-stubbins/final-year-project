@@ -39,11 +39,14 @@ class _PatternCardState extends State<PatternCard> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                TextButton(
-                  child: const Text('Open pattern'),
-                  onPressed: () {
-                    Core.getInstance().changeDashboardPageIndex(3); 
-                  },
+                Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child: FilledButton(
+                    child: const Text('Open pattern'),
+                    onPressed: () {
+                      Core.getInstance().changeDashboardPageIndex(3);
+                    },
+                  ),
                 ),
               ],
             ),
