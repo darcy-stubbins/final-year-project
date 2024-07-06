@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:my_app/coreFunctionality/loginController.dart';
 
 class Core {
@@ -5,6 +7,8 @@ class Core {
   int loginRoutePageIndex = 0;
   int dashboardPageIndex = 0;
   bool displayCounter = false;
+  final Map<int, int> counters = HashMap();
+  int currentCounter = 0;
   late Function changeAppState;
 
   static Core singleton = Core._();
@@ -54,6 +58,26 @@ class Core {
 
   void changeDisplayCounter(bool displayCounter) {
     this.displayCounter = displayCounter;
+    changeAppState();
+  }
+
+  void openPatternDetails(int patternID) {
+    //update the counter
+    this.currentCounter = patternID;
+
+    this.changeDashboardPageIndex(3);
+  }
+
+  int? getCurrentCounterValue() {
+    if (this.counters.containsKey(this.currentCounter)) {
+      return this.counters[this.currentCounter];
+    } else {
+      return null;
+    }
+  }
+
+  void createCounter() {
+    this.counters[this.currentCounter] = 0;
     changeAppState();
   }
 }

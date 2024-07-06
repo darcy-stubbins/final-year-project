@@ -14,7 +14,7 @@ class _ProfileState extends State<Profile> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title:
-            Text('Edit profile', style: Theme.of(context).textTheme.titleLarge),
+            Text('Edit Profile', style: Theme.of(context).textTheme.titleLarge),
       ),
       body: Card(
         margin: const EdgeInsets.all(20.0),
@@ -39,7 +39,7 @@ class _ProfileState extends State<Profile> {
                 padding: EdgeInsets.only(bottom: 10.0),
                 child: FilledButton(
                   onPressed: () {},
-                  child: const Text('Select new profile picture'),
+                  child: const Text('Select a New Profile Picture'),
                 ),
               ),
             ),
@@ -65,7 +65,7 @@ class _ProfileState extends State<Profile> {
                 padding: EdgeInsets.all(10.0),
                 child: FilledButton(
                   onPressed: () {},
-                  child: const Text('Save changes'),
+                  child: const Text('Save Changes'),
                 ),
               ),
             ),

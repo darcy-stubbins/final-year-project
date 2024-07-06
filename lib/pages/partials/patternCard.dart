@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:my_app/coreFunctionality/core.dart';
 
 class PatternCard extends StatefulWidget {
-  const PatternCard({super.key});
+  final int id;
+  final String name;
+  const PatternCard({super.key, required this.id, required this.name});
 
   @override
   State<PatternCard> createState() => _PatternCardState();
@@ -16,8 +18,8 @@ class _PatternCardState extends State<PatternCard> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            const ListTile(
-              title: Text('Pattern name'),
+            ListTile(
+              title: Text(widget.name),
             ),
             const Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -42,9 +44,9 @@ class _PatternCardState extends State<PatternCard> {
                 Padding(
                   padding: EdgeInsets.all(5.0),
                   child: FilledButton(
-                    child: const Text('Open pattern'),
+                    child: const Text('Open Pattern'),
                     onPressed: () {
-                      Core.getInstance().changeDashboardPageIndex(3);
+                      Core.getInstance().openPatternDetails(widget.id);
                     },
                   ),
                 ),

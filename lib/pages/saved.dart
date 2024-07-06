@@ -15,15 +15,15 @@ class _SavedState extends State<Saved> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: Text('Your saved patterns',
+        title: Text('Your Saved Patterns',
             style: Theme.of(context).textTheme.titleLarge),
       ),
       body: Container(
         margin: const EdgeInsets.all(20.0),
         child: Column(
           children: <Widget>[
-            PatternCard(),
-            PatternCard(),
+            PatternCard(id: 1, name: 'Pattern Example 1'),
+            PatternCard(id: 2, name: 'Pattern Example 2'),
           ],
         ),
       ),

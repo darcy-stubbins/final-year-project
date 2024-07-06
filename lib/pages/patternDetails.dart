@@ -29,15 +29,15 @@ class _PatternDetailsState extends State<PatternDetails> {
   @override
   Widget build(BuildContext context) {
     Widget counter;
-    if (Core.getInstance().displayCounter) {
+    if (Core.getInstance().getCurrentCounterValue() != null) {
       counter = Card(
-        margin: const EdgeInsets.only(right: 90.0, left: 90.0, top: 20.0),
+        margin: EdgeInsets.only(right: 80.0, left: 80.0, top: 20.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
               padding:
-                  const EdgeInsets.only(top: 5.0, bottom: 5.0, right: 40.0),
+                  const EdgeInsets.only(top: 10.0, bottom: 10.0, right: 40.0),
               child: FloatingActionButton(
                 onPressed: _decrementCounter,
                 backgroundColor: Colors.indigo,
@@ -52,7 +52,8 @@ class _PatternDetailsState extends State<PatternDetails> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 5.0, bottom: 5.0, left: 40.0),
+              padding:
+                  const EdgeInsets.only(top: 10.0, bottom: 10.0, left: 40.0),
               child: FloatingActionButton(
                 onPressed: _incrementCounter,
                 backgroundColor: Colors.indigo,
@@ -68,9 +69,9 @@ class _PatternDetailsState extends State<PatternDetails> {
           padding: EdgeInsets.all(10.0),
           child: FilledButton(
             onPressed: () {
-              Core.getInstance().changeDisplayCounter(true);
+              Core.getInstance().createCounter();
             },
-            child: const Text('Add counter'),
+            child: const Text('Add Counter'),
           ),
         ),
       );
@@ -79,7 +80,7 @@ class _PatternDetailsState extends State<PatternDetails> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: Text('Pattern details',
+        title: Text('Pattern Details',
             style: Theme.of(context).textTheme.titleLarge),
       ),
       body: Column(

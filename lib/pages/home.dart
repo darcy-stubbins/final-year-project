@@ -48,7 +48,7 @@ class _HomeState extends State<Home> {
               child: TextField(
                 onChanged: searchBarChanged,
                 decoration: InputDecoration(
-                  hintText: "Try searching for a pattern",
+                  hintText: "Try Searching for a Pattern",
                   hintStyle: Theme.of(context).textTheme.labelLarge,
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(100.0),
@@ -68,9 +68,9 @@ class _HomeState extends State<Home> {
               ),
             ),
             //passing in the PatternCard partial
-            const PatternCard(),
-            const PatternCard(),
-            const PatternCard()
+            PatternCard(id: 1, name: 'Pattern Example 1'),
+            PatternCard(id: 2, name: 'Pattern Example 2'),
+            PatternCard(id: 3, name: 'Pattern Example 3')
           ],
         ),
       ),
