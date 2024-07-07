@@ -45,7 +45,7 @@ class _HomeState extends State<Home> {
                 onChanged: searchBarChanged,
                 decoration: InputDecoration(
                   hintText: "Try Searching for a Pattern",
-                  hintStyle: Theme.of(context).textTheme.labelLarge,
+                  hintStyle: Theme.of(context).textTheme.labelMedium,
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(100.0),
                     borderSide: BorderSide(

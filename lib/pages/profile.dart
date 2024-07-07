@@ -94,7 +94,7 @@ class _ProfileState extends State<Profile> {
                     builder: (BuildContext context) => AlertDialog(
                       title: Text(
                           'Are you sure you want to delete your account?',
-                          style: Theme.of(context).textTheme.titleMedium),
+                          style: Theme.of(context).textTheme.titleSmall),
                       // content: Text(''),
                       actions: <Widget>[
                         FilledButton(

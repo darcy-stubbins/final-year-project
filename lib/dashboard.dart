@@ -49,8 +49,8 @@ class _DashboardState extends State<Dashboard> {
                 icon: Icon(
                   Icons.home,
                   color: (Core.getInstance().dashboardPageIndex == 0)
-                      ? Colors.red
-                      : Colors.amber,
+                      ? Theme.of(context).colorScheme.secondary
+                      : Theme.of(context).colorScheme.tertiary,
                   size: 34.0,
                 ),
                 label: "Home"),
@@ -59,8 +59,8 @@ class _DashboardState extends State<Dashboard> {
                 icon: Icon(
                   Icons.star_rate,
                   color: (Core.getInstance().dashboardPageIndex == 1)
-                      ? Colors.red
-                      : Colors.amber,
+                      ? Theme.of(context).colorScheme.secondary
+                      : Theme.of(context).colorScheme.tertiary,
                   size: 34.0,
                 ),
                 label: "Saved"),
@@ -69,8 +69,8 @@ class _DashboardState extends State<Dashboard> {
                 icon: Icon(
                   Icons.face,
                   color: (Core.getInstance().dashboardPageIndex == 2)
-                      ? Colors.red
-                      : Colors.amber,
+                      ? Theme.of(context).colorScheme.secondary
+                      : Theme.of(context).colorScheme.tertiary,
                   size: 34.0,
                 ),
                 label: "Profile"),

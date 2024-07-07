@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:my_app/coreFunctionality/core.dart';
@@ -26,44 +27,65 @@ class _AppState extends State<App> {
       access = LoginRoute();
     }
 
+    //colours used in the theme data
+    MaterialColor primaryColor = Colors.blueGrey;
+    MaterialColor secondaryColor = Colors.indigo;
+    MaterialColor tertiaryColor = Colors.indigo;
+
     return MaterialApp(
         theme: ThemeData(
           //colour themes
-          colorScheme: ColorScheme.fromSwatch(
-            primarySwatch: Colors.indigo,
-            cardColor: const Color.fromRGBO(197, 203, 227, 1),
-            accentColor: const Color.fromRGBO(64, 86, 161, 1),
-            backgroundColor: const Color.fromRGBO(239, 226, 186, 1),
+          colorScheme: ColorScheme(
+            primary: primaryColor,
+            onPrimary: primaryColor,
+            surface: primaryColor.shade300,
+            onSurface: Colors.white,
+            secondary: secondaryColor.shade900,
+            onSecondary: secondaryColor.shade900,
+            tertiary: tertiaryColor.shade600,
+            onTertiary: tertiaryColor.shade600,
+            error: Colors.red,
+            onError: Colors.red,
+            background: primaryColor.shade100,
+            onBackground: primaryColor.shade100,
+            brightness: Brightness.light,
+            // backgroundColor: primaryColor.shade100,
           ),
-          textTheme: const TextTheme(
-            //large title theme data
-            titleLarge: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.indigo,
-            ),
-            //medium title theme data
-            titleMedium: TextStyle(
-              color: Colors.deepOrange,
-            ),
-            //small title theme data
-            titleSmall: TextStyle(
-              color: Colors.purple,
-            ),
-            //style for hint text
-            labelLarge: TextStyle(
-              color: Colors.grey,
-            ),
-          ),
+          textTheme: TextTheme(
+              //large title theme data
+              titleLarge: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: primaryColor.shade900,
+              ),
+              //medium title theme data
+              titleMedium: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: primaryColor.shade50,
+              ),
+              //small title theme data
+              titleSmall: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: primaryColor.shade900,
+              ),
+              //style for hint text
+              labelLarge: TextStyle(
+                color: primaryColor.shade900,
+              ),
+              //style for hint text (search bar)
+              labelMedium: TextStyle(
+                color: primaryColor.shade300,
+                fontSize: 16.0,
+              )),
           //button themes
           filledButtonTheme: FilledButtonThemeData(
             style: FilledButton.styleFrom(
-                backgroundColor: Colors.amber,
-                foregroundColor: Colors.indigo,
+                backgroundColor: primaryColor.shade900,
+                foregroundColor: Colors.white,
                 padding: EdgeInsets.all(10.0)),
           ),
           //icon themes
           iconTheme: IconThemeData(
-            color: Colors.green,
+            color: primaryColor.shade50,
             size: 24.0,
           ),
         ),
