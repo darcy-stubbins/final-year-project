@@ -44,6 +44,7 @@ class _DashboardState extends State<Dashboard> {
           onTap: _onItemClicked,
           // nav bar items and icons
           items: [
+            //home nav bar
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.home,
@@ -53,6 +54,7 @@ class _DashboardState extends State<Dashboard> {
                   size: 34.0,
                 ),
                 label: "Home"),
+            //saved nav bar
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.star_rate,
@@ -62,6 +64,7 @@ class _DashboardState extends State<Dashboard> {
                   size: 34.0,
                 ),
                 label: "Saved"),
+            //profile nav bar
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.face,

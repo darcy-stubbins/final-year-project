@@ -28,6 +28,7 @@ class _AppState extends State<App> {
 
     return MaterialApp(
         theme: ThemeData(
+          //colour themes
           colorScheme: ColorScheme.fromSwatch(
             primarySwatch: Colors.indigo,
             cardColor: const Color.fromRGBO(197, 203, 227, 1),
@@ -35,28 +36,35 @@ class _AppState extends State<App> {
             backgroundColor: const Color.fromRGBO(239, 226, 186, 1),
           ),
           textTheme: const TextTheme(
-              //large title theme data
-              titleLarge: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.indigo,
-              ),
-              //medium title theme data
-              titleMedium: TextStyle(
-                color: Colors.deepOrange,
-              ),
-              //small title theme data
-              titleSmall: TextStyle(
-                color: Colors.purple,
-              ),
-              //style for hint text
-              labelLarge: TextStyle(
-                color: Colors.grey,
-              )),
+            //large title theme data
+            titleLarge: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.indigo,
+            ),
+            //medium title theme data
+            titleMedium: TextStyle(
+              color: Colors.deepOrange,
+            ),
+            //small title theme data
+            titleSmall: TextStyle(
+              color: Colors.purple,
+            ),
+            //style for hint text
+            labelLarge: TextStyle(
+              color: Colors.grey,
+            ),
+          ),
+          //button themes
           filledButtonTheme: FilledButtonThemeData(
             style: FilledButton.styleFrom(
                 backgroundColor: Colors.amber,
                 foregroundColor: Colors.indigo,
                 padding: EdgeInsets.all(10.0)),
+          ),
+          //icon themes
+          iconTheme: IconThemeData(
+            color: Colors.green,
+            size: 24.0,
           ),
         ),
 

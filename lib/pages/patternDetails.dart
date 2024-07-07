@@ -11,12 +11,14 @@ class PatternDetails extends StatefulWidget {
 class _PatternDetailsState extends State<PatternDetails> {
   int _counter = 0;
 
+  //+ counter
   void _incrementCounter() {
     setState(() {
       _counter++;
     });
   }
 
+  //- counter
   void _decrementCounter() {
     setState(() {
       if (_counter >= 1) {
@@ -35,6 +37,7 @@ class _PatternDetailsState extends State<PatternDetails> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            //- counter button
             Padding(
               padding:
                   const EdgeInsets.only(top: 10.0, bottom: 10.0, right: 40.0),
@@ -44,6 +47,7 @@ class _PatternDetailsState extends State<PatternDetails> {
                 child: const Icon(Icons.remove),
               ),
             ),
+            //displayed current counter number
             Padding(
               padding: const EdgeInsets.all(0),
               child: Text(
@@ -51,6 +55,7 @@ class _PatternDetailsState extends State<PatternDetails> {
                 style: Theme.of(context).textTheme.titleLarge,
               ),
             ),
+            //+ counter button
             Padding(
               padding:
                   const EdgeInsets.only(top: 10.0, bottom: 10.0, left: 40.0),
@@ -64,6 +69,7 @@ class _PatternDetailsState extends State<PatternDetails> {
         ),
       );
     } else {
+      //add counter button
       counter = Center(
         child: Padding(
           padding: EdgeInsets.all(10.0),

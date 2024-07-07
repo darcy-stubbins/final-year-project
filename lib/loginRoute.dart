@@ -12,16 +12,15 @@ class LoginRoute extends StatefulWidget {
 }
 
 class _LoginRouteState extends State<LoginRoute> {
-
   @override
   Widget build(BuildContext context) {
-    // list of screens used for the index linking to files
+    //list of screens used for the index linking to files
     final List<Widget> screens = [
       const Login(),
       const Register(),
       const AccountCreated(),
     ];
 
-    return screens.elementAt(Core.getInstance().loginRoutePageIndex); 
+    return screens.elementAt(Core.getInstance().loginRoutePageIndex);
   }
 }

@@ -11,17 +11,18 @@ class Saved extends StatefulWidget {
 class _SavedState extends State<Saved> {
   @override
   Widget build(BuildContext context) {
-    // ignore: prefer_const_constructors
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: Text('Your Saved Patterns',
             style: Theme.of(context).textTheme.titleLarge),
       ),
+      //pattern card displaying
       body: Container(
         margin: const EdgeInsets.all(20.0),
         child: Column(
           children: <Widget>[
+            //passing in the PatternCard partial
             PatternCard(id: 1, name: 'Pattern Example 1'),
             PatternCard(id: 2, name: 'Pattern Example 2'),
           ],

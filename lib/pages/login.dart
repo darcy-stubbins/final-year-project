@@ -37,6 +37,7 @@ class _LoginState extends State<Login> {
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ),
+                    //email field
                     TextFormField(
                       decoration: InputDecoration(
                         hintText: 'Enter your email',
@@ -49,6 +50,7 @@ class _LoginState extends State<Login> {
                         return null;
                       },
                     ),
+                    //password field
                     TextFormField(
                       decoration: InputDecoration(
                         hintText: 'Enter your password',
@@ -63,6 +65,7 @@ class _LoginState extends State<Login> {
                     ),
                     Row(
                       children: <Widget>[
+                        //submit credentials button
                         Padding(
                           padding: EdgeInsets.all(5.0),
                           child: FilledButton(
@@ -72,6 +75,7 @@ class _LoginState extends State<Login> {
                             child: const Text('Submit'),
                           ),
                         ),
+                        //forgot password button
                         Padding(
                           padding: EdgeInsets.all(5.0),
                           child: FilledButton(
@@ -83,6 +87,7 @@ class _LoginState extends State<Login> {
                     ),
                     Row(
                       children: <Widget>[
+                        //create account button
                         Padding(
                           padding: EdgeInsets.all(1.0),
                           child: FilledButton(

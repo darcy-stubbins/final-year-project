@@ -35,6 +35,7 @@ class _AccountCreated extends State<AccountCreated> {
                         subtitle: Text('We cant wait to see what you make!',
                             style: Theme.of(context).textTheme.titleMedium),
                       ),
+                      //login button
                       Row(
                         children: <Widget>[
                           Padding(

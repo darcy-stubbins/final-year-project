@@ -40,11 +40,7 @@ class _HomeState extends State<Home> {
           children: <Widget>[
             Padding(
               padding: EdgeInsets.only(bottom: 10.0),
-              // child: SearchBar(
-              //   onChanged: searchBarChanged,
-              //   hintText: 'Try searching for a pattern',
-              //   hintStyle: WidgetStateProperty<TextStyle>(color: Colors.grey),
-              // ),
+              //search bar
               child: TextField(
                 onChanged: searchBarChanged,
                 decoration: InputDecoration(
@@ -67,6 +63,7 @@ class _HomeState extends State<Home> {
                 ),
               ),
             ),
+            //pattern card displaying
             //passing in the PatternCard partial
             PatternCard(id: 1, name: 'Pattern Example 1'),
             PatternCard(id: 2, name: 'Pattern Example 2'),

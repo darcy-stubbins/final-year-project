@@ -33,6 +33,7 @@ class _RegisterState extends State<Register> {
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
                       ),
+                      //name input
                       TextFormField(
                         decoration: InputDecoration(
                           hintText: 'Name',
@@ -45,6 +46,7 @@ class _RegisterState extends State<Register> {
                           return null;
                         },
                       ),
+                      //email input
                       TextFormField(
                         decoration: InputDecoration(
                           hintText: 'Email',
@@ -57,6 +59,7 @@ class _RegisterState extends State<Register> {
                           return null;
                         },
                       ),
+                      //password input
                       TextFormField(
                         decoration: InputDecoration(
                           hintText: 'Password',
@@ -69,6 +72,7 @@ class _RegisterState extends State<Register> {
                           return null;
                         },
                       ),
+                      //confirm password input
                       TextFormField(
                         decoration: InputDecoration(
                           hintText: 'Confirm password',
@@ -81,6 +85,7 @@ class _RegisterState extends State<Register> {
                           return null;
                         },
                       ),
+                      //create account button
                       Row(
                         children: <Widget>[
                           Padding(
