@@ -42,6 +42,8 @@ class _HomeState extends State<Home> {
               padding: EdgeInsets.only(bottom: 10.0),
               //search bar
               child: TextField(
+                style:
+                    TextStyle(color: Theme.of(context).colorScheme.onPrimary),
                 onChanged: searchBarChanged,
                 decoration: InputDecoration(
                   hintText: "Try Searching for a Pattern",

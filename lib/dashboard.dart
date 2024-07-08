@@ -38,7 +38,7 @@ class _DashboardState extends State<Dashboard> {
         bottomNavigationBar: BottomNavigationBar(
           showSelectedLabels: false,
           showUnselectedLabels: false,
-          backgroundColor: Theme.of(context).colorScheme.primary,
+          backgroundColor: Theme.of(context).colorScheme.surface,
           type: BottomNavigationBarType.fixed,
           currentIndex: navBarIndex,
           onTap: _onItemClicked,
@@ -49,8 +49,8 @@ class _DashboardState extends State<Dashboard> {
                 icon: Icon(
                   Icons.home,
                   color: (Core.getInstance().dashboardPageIndex == 0)
-                      ? Theme.of(context).colorScheme.secondary
-                      : Theme.of(context).colorScheme.tertiary,
+                      ? Theme.of(context).colorScheme.onSurface
+                      : Theme.of(context).colorScheme.onPrimary,
                   size: 34.0,
                 ),
                 label: "Home"),
@@ -59,8 +59,8 @@ class _DashboardState extends State<Dashboard> {
                 icon: Icon(
                   Icons.star_rate,
                   color: (Core.getInstance().dashboardPageIndex == 1)
-                      ? Theme.of(context).colorScheme.secondary
-                      : Theme.of(context).colorScheme.tertiary,
+                      ? Theme.of(context).colorScheme.onSurface
+                      : Theme.of(context).colorScheme.onPrimary,
                   size: 34.0,
                 ),
                 label: "Saved"),
@@ -69,8 +69,8 @@ class _DashboardState extends State<Dashboard> {
                 icon: Icon(
                   Icons.face,
                   color: (Core.getInstance().dashboardPageIndex == 2)
-                      ? Theme.of(context).colorScheme.secondary
-                      : Theme.of(context).colorScheme.tertiary,
+                      ? Theme.of(context).colorScheme.onSurface
+                      : Theme.of(context).colorScheme.onPrimary,
                   size: 34.0,
                 ),
                 label: "Profile"),

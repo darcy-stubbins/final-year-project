@@ -43,7 +43,6 @@ class _PatternDetailsState extends State<PatternDetails> {
                   const EdgeInsets.only(top: 10.0, bottom: 10.0, right: 40.0),
               child: FloatingActionButton(
                 onPressed: _decrementCounter,
-                backgroundColor: Colors.indigo,
                 child: const Icon(Icons.remove),
               ),
             ),
@@ -61,7 +60,6 @@ class _PatternDetailsState extends State<PatternDetails> {
                   const EdgeInsets.only(top: 10.0, bottom: 10.0, left: 40.0),
               child: FloatingActionButton(
                 onPressed: _incrementCounter,
-                backgroundColor: Colors.indigo,
                 child: const Icon(Icons.add),
               ),
             ),
@@ -77,7 +75,7 @@ class _PatternDetailsState extends State<PatternDetails> {
             onPressed: () {
               Core.getInstance().createCounter();
             },
-            child: const Text('Add Counter'),
+            child: Text('Add Counter'),
           ),
         ),
       );

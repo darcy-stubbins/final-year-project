@@ -37,31 +37,38 @@ class _LoginState extends State<Login> {
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ),
-                    //email field
-                    TextFormField(
-                      decoration: InputDecoration(
-                        hintText: 'Enter your email',
-                        hintStyle: Theme.of(context).textTheme.labelLarge,
+                    Padding(
+                      padding: EdgeInsets.only(left: 5.0, right: 5.0),
+                      //email field
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          hintText: 'Enter your email',
+                          hintStyle: Theme.of(context).textTheme.labelLarge,
+                        ),
+                        validator: (String? value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
                       ),
-                      validator: (String? value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
-                      },
                     ),
-                    //password field
-                    TextFormField(
-                      decoration: InputDecoration(
-                        hintText: 'Enter your password',
-                        hintStyle: Theme.of(context).textTheme.labelLarge,
+                    Padding(
+                      padding:
+                          EdgeInsets.only(left: 5.0, right: 5.0, bottom: 10.0),
+                      //password field
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          hintText: 'Enter your password',
+                          hintStyle: Theme.of(context).textTheme.labelLarge,
+                        ),
+                        validator: (String? value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
                       ),
-                      validator: (String? value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
-                      },
                     ),
                     Row(
                       children: <Widget>[

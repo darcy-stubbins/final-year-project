@@ -37,8 +37,8 @@ class _AppState extends State<App> {
           //colour themes
           colorScheme: ColorScheme(
             primary: primaryColor,
-            onPrimary: primaryColor,
-            surface: primaryColor.shade300,
+            onPrimary: primaryColor.shade900,
+            surface: primaryColor.shade200, //card colour**
             onSurface: Colors.white,
             secondary: secondaryColor.shade900,
             onSecondary: secondaryColor.shade900,
@@ -46,6 +46,7 @@ class _AppState extends State<App> {
             onTertiary: tertiaryColor.shade600,
             error: Colors.red,
             onError: Colors.red,
+            //(deprecated but could not find alternatives in documentation)
             background: primaryColor.shade100,
             onBackground: primaryColor.shade100,
             brightness: Brightness.light,
@@ -70,6 +71,7 @@ class _AppState extends State<App> {
               //style for hint text
               labelLarge: TextStyle(
                 color: primaryColor.shade900,
+                fontSize: 16.0,
               ),
               //style for hint text (search bar)
               labelMedium: TextStyle(
@@ -79,9 +81,14 @@ class _AppState extends State<App> {
           //button themes
           filledButtonTheme: FilledButtonThemeData(
             style: FilledButton.styleFrom(
-                backgroundColor: primaryColor.shade900,
-                foregroundColor: Colors.white,
+                backgroundColor: primaryColor.shade700,
+                foregroundColor: primaryColor.shade50,
                 padding: EdgeInsets.all(10.0)),
+          ),
+          //button theme (counter buttons)
+          floatingActionButtonTheme: FloatingActionButtonThemeData(
+            backgroundColor: primaryColor.shade900,
+            foregroundColor: primaryColor.shade50,
           ),
           //icon themes
           iconTheme: IconThemeData(
