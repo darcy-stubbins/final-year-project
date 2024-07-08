@@ -61,7 +61,7 @@ class _AppState extends State<App> {
               //medium title theme data
               titleMedium: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: primaryColor.shade50,
+                color: primaryColor.shade900,
               ),
               //small title theme data
               titleSmall: TextStyle(
