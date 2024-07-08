@@ -33,6 +33,7 @@ class _AppState extends State<App> {
     MaterialColor tertiaryColor = Colors.indigo;
 
     return MaterialApp(
+        title: 'Crafting App',
         theme: ThemeData(
           //colour themes
           colorScheme: ColorScheme(
