@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
@@ -28,7 +27,7 @@ class _AppState extends State<App> {
     }
 
     //colours used in the theme data
-    MaterialColor primaryColor = Colors.blueGrey;
+    MaterialColor primaryColor = Colors.indigo;
     MaterialColor secondaryColor = Colors.indigo;
     MaterialColor tertiaryColor = Colors.indigo;
 
