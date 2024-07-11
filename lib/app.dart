@@ -6,6 +6,11 @@ import 'package:flutter/widgets.dart';
 import 'package:my_app/coreFunctionality/core.dart';
 import 'package:my_app/dashboard.dart';
 import 'package:my_app/loginRoute.dart';
+import 'package:my_app/pages/home.dart';
+import 'package:my_app/pages/login.dart';
+import 'package:my_app/pages/register.dart';
+import './pages/home.dart';
+import 'models/user.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -33,6 +38,12 @@ class _AppState extends State<App> {
 
     return MaterialApp(
         title: 'Crafting App',
+        //introducing the routes for the API
+        initialRoute: '/',
+        routes: {
+          '/': (context) => Login(),
+          '/register': (context) => Register()
+        },
         theme: ThemeData(
           //colour themes
           colorScheme: ColorScheme(
