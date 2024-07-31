@@ -65,7 +65,7 @@ class Core {
     //update the counter
     this.currentCounter = patternID;
 
-    this.changeDashboardPageIndex(3);
+    this.changeDashboardPageIndex(4);
   }
 
   int? getCurrentCounterValue() {

@@ -4,6 +4,7 @@ import 'package:my_app/pages/home.dart';
 import 'package:my_app/pages/patternDetails.dart';
 import 'package:my_app/pages/profile.dart';
 import 'package:my_app/pages/saved.dart';
+import 'package:my_app/pages/add.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -18,13 +19,14 @@ class _DashboardState extends State<Dashboard> {
   List<Widget> screens = [
     const Home(),
     const Saved(),
+    const Add(),
     const Profile(),
     const PatternDetails(),
   ];
 
 // function to set index based on what is clicked
   void _onItemClicked(int index) {
-    if (index < 3) {
+    if (index < 4) {
       navBarIndex = index;
     }
     Core.getInstance().changeDashboardPageIndex(index);
@@ -54,11 +56,20 @@ class _DashboardState extends State<Dashboard> {
                   size: 34.0,
                 ),
                 label: "Home"),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.add,
+                  color: (Core.getInstance().dashboardPageIndex == 1)
+                      ? Theme.of(context).colorScheme.onSurface
+                      : Theme.of(context).colorScheme.onPrimary,
+                  size: 40.0,
+                ),
+                label: "Add"),
             //saved nav bar
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.star_rate,
-                  color: (Core.getInstance().dashboardPageIndex == 1)
+                  color: (Core.getInstance().dashboardPageIndex == 2)
                       ? Theme.of(context).colorScheme.onSurface
                       : Theme.of(context).colorScheme.onPrimary,
                   size: 34.0,
@@ -68,7 +79,7 @@ class _DashboardState extends State<Dashboard> {
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.face,
-                  color: (Core.getInstance().dashboardPageIndex == 2)
+                  color: (Core.getInstance().dashboardPageIndex == 3)
                       ? Theme.of(context).colorScheme.onSurface
                       : Theme.of(context).colorScheme.onPrimary,
                   size: 34.0,
