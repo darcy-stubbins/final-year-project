@@ -18,8 +18,8 @@ class _DashboardState extends State<Dashboard> {
 // list of screens used for the index linking to files
   List<Widget> screens = [
     const Home(),
-    const Saved(),
     const Add(),
+    const Saved(),
     const Profile(),
     const PatternDetails(),
   ];

@@ -2,11 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:my_app/coreFunctionality/core.dart';
+import 'package:my_app/coreFunctionality/models/pattern.dart';
 
 class PatternCard extends StatefulWidget {
-  final int id;
-  final String name;
-  const PatternCard({super.key, required this.id, required this.name});
+  final Pattern pattern;
+  const PatternCard({super.key, required this.pattern});
 
   @override
   State<PatternCard> createState() => _PatternCardState();
@@ -22,7 +22,7 @@ class _PatternCardState extends State<PatternCard> {
           children: <Widget>[
             ListTile(
               title: Text(
-                widget.name,
+                widget.pattern.patternName,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
             ),
@@ -82,7 +82,7 @@ class _PatternCardState extends State<PatternCard> {
                   child: FilledButton(
                     child: const Text('Open Pattern'),
                     onPressed: () {
-                      Core.getInstance().openPatternDetails(widget.id);
+                      Core.getInstance().openPatternDetails(widget.pattern.id);
                     },
                   ),
                 ),

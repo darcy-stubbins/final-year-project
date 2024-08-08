@@ -1,7 +1,7 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:my_app/pages/partials/patternCard.dart';
+import 'package:my_app/coreFunctionality/models/pattern.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -11,6 +11,22 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  //function to return patterns for the homepage
+  List<Widget> buildPatterns() {
+    List<dynamic> patterns = jsonDecode(
+        '[{"id": 1,"pattern_name": "pattern 1","pdf_path": "https://mycoolpatternpdf.com "},{"id": 2,"pattern_name": "pattern 2","pdf_path": "https://mycoolpatternpdf.com "},{"id": 3,"pattern_name": "pattern 3","pdf_path": "https://mycoolpattern123pdf.com "},{"id": 4,"pattern_name": "pattern 4","pdf_path": "https://mycoolpattern123456789pdf.com "},{"id": 5,"pattern_name": "pattern 5","pdf_path": "bsdhbgjsbgjbs"},{"id": 6,"pattern_name": "pattern 6","pdf_path": "bsdhbgjsbgjbs"},{"id": 7,"pattern_name": "pattern 7","pdf_path": "bsdhbgjsbgjbs"}]');
+    //create an empty list of widgets
+    List<Widget> widgets = <Widget>[];
+    //loop that will get each pattern and add it to a pattern card
+    patterns.forEach((patternMap) {
+      Pattern pattern = Pattern.fromJson(patternMap as Map<String, dynamic>);
+      widgets.add(PatternCard(pattern: pattern));
+    });
+    //returning the list of pattern cards
+    return widgets;
+  }
+
+  //search bar functionality
   List<String> options = [
     'One',
     'Two',
@@ -34,43 +50,44 @@ class _HomeState extends State<Home> {
       // appBar: AppBar(
       //   title: const Text('Home'),
       // ),
-      body: Container(
-        margin: const EdgeInsets.all(20.0),
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(bottom: 10.0),
-              //search bar
-              child: TextField(
-                style:
-                    TextStyle(color: Theme.of(context).colorScheme.onPrimary),
-                onChanged: searchBarChanged,
-                decoration: InputDecoration(
-                  hintText: "Try Searching for a Pattern",
-                  hintStyle: Theme.of(context).textTheme.labelMedium,
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(100.0),
-                    borderSide: BorderSide(
-                        color: Theme.of(context).colorScheme.primary),
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(100.0),
-                    borderSide: BorderSide(
-                        color: Theme.of(context).colorScheme.primary),
-                  ),
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: Theme.of(context).colorScheme.primary,
+      body: SingleChildScrollView(
+        child: Container(
+          margin: const EdgeInsets.all(20.0),
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(bottom: 10.0),
+                //search bar
+                child: TextField(
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+                  onChanged: searchBarChanged,
+                  decoration: InputDecoration(
+                    hintText: "Try Searching for a Pattern",
+                    hintStyle: Theme.of(context).textTheme.labelMedium,
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(100.0),
+                      borderSide: BorderSide(
+                          color: Theme.of(context).colorScheme.primary),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(100.0),
+                      borderSide: BorderSide(
+                          color: Theme.of(context).colorScheme.primary),
+                    ),
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                   ),
                 ),
               ),
-            ),
-            //pattern card displaying
-            //passing in the PatternCard partial
-            PatternCard(id: 1, name: 'Pattern Example 1'),
-            PatternCard(id: 2, name: 'Pattern Example 2'),
-            PatternCard(id: 3, name: 'Pattern Example 3')
-          ],
+              Column(
+                //pattern card displaying
+                children: this.buildPatterns(),
+              ),
+            ],
+          ),
         ),
       ),
     );
