@@ -13,6 +13,7 @@ class Saved extends StatefulWidget {
 class _SavedState extends State<Saved> {
   //function to return saved patterns in a list of pattern cards
   List<Widget> buildSavedPatterns() {
+    //decoding the json
     List<dynamic> patterns = jsonDecode(
         '[{"id": 1,"pattern_name": "pattern 1","pdf_path": "https://mycoolpatternpdf.com"},{"id": 2,"pattern_name": "pattern 2","pdf_path": "https://mycoolpatternpdf.com"}]');
     //create empty widget list

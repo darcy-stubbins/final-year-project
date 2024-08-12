@@ -65,7 +65,7 @@ class _AppState extends State<App> {
               ),
               //small title theme data
               titleSmall: TextStyle(
-                fontWeight: FontWeight.bold,
+                // fontWeight: FontWeight.bold,
                 color: primaryColor.shade900,
               ),
               //style for hint text

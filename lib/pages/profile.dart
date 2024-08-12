@@ -1,6 +1,7 @@
-import 'dart:io';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:my_app/coreFunctionality/models/user.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -10,6 +11,17 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  //function to return the user that is logged in
+  User getLoggedInUser() {
+    //decoding the json
+    Map<String, dynamic> userMap = jsonDecode(
+        '{"user_name": "chrispy","user_email": "chrispy@mail.com","user_password": "password"}');
+    //assign the given json to user and return it
+    User user = User.fromJson(userMap);
+
+    return user;
+  }
+
   //image picker functionality
   Future getImage() async {
     final XFile? pickedFile =
@@ -24,101 +36,109 @@ class _ProfileState extends State<Profile> {
         title:
             Text('Edit Profile', style: Theme.of(context).textTheme.titleLarge),
       ),
-      body: Card(
-        margin: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            //profile picture display
-            Center(
-              child: Container(
-                height: 300,
-                width: 350,
-                padding: const EdgeInsets.only(
-                    left: 50.0, top: 10.0, right: 50.0, bottom: 10.0),
-                child: Image.asset(
-                  'assets/images/placeholder.jpg',
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-            //select profile pic button
-            Center(
-              child: Padding(
-                padding: EdgeInsets.only(bottom: 10.0),
-                child: FilledButton(
-                  onPressed: () {
-                    getImage();
-                  },
-                  child: const Text('Select a New Profile Picture'),
-                ),
-              ),
-            ),
-            //update profile name field and button
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    hintText: 'Update Name',
-                    hintStyle: Theme.of(context).textTheme.labelLarge,
+      body: SingleChildScrollView(
+        child: Card(
+          margin: const EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              //profile picture display
+              Center(
+                child: Container(
+                  height: 300,
+                  width: 350,
+                  padding: const EdgeInsets.only(
+                      left: 50.0, top: 10.0, right: 50.0, bottom: 10.0),
+                  child: Image.asset(
+                    'assets/images/placeholder.jpg',
+                    fit: BoxFit.fill,
                   ),
-                  validator: (String? value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-                    return null;
-                  },
                 ),
               ),
-            ),
-            //save changes button
-            Center(
-              child: Padding(
-                padding: EdgeInsets.all(10.0),
-                child: FilledButton(
-                  onPressed: () {},
-                  child: const Text('Save Changes'),
+              //select profile pic button
+              Center(
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: 10.0),
+                  child: FilledButton(
+                    onPressed: () {
+                      getImage();
+                    },
+                    child: const Text('Select a New Profile Picture'),
+                  ),
                 ),
               ),
-            ),
-            //delete account button and modal functionality
-            Center(
-              child: Padding(
-                padding: EdgeInsets.only(top: 40.0, bottom: 20.0),
-                child: FilledButton(
-                  onPressed: () => showDialog<String>(
-                    context: context,
-                    builder: (BuildContext context) => AlertDialog(
-                      title: Text(
-                          'Are you sure you want to delete your account?',
-                          style: Theme.of(context).textTheme.titleSmall),
-                      // content: Text(''),
-                      actions: <Widget>[
-                        FilledButton(
-                          onPressed: () => Navigator.pop(context, 'Cancel'),
-                          child: const Text('Cancel'),
-                        ),
-                        FilledButton(
-                          onPressed: () => Navigator.pop(context, 'OK'),
-                          child: const Text('Delete Account'),
-                          style: ButtonStyle(
-                            backgroundColor:
-                                WidgetStateProperty.all(Colors.red),
-                          ),
-                        ),
-                      ],
+              //update profile name field and button
+              Padding(
+                padding: EdgeInsets.only(top: 40.0, left: 20.0),
+                child: Text('Enter a new username',
+                    style: Theme.of(context).textTheme.titleMedium),
+              ),
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                      bottom: 20.0, left: 20.0, right: 20.0),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      hintText: this.getLoggedInUser().userName,
+                      hintStyle: Theme.of(context).textTheme.labelLarge,
                     ),
+                    validator: (String? value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter some text';
+                      }
+                      return null;
+                    },
                   ),
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStateProperty.all(Colors.red),
-                  ),
-                  child: const Text('Delete Account'),
                 ),
               ),
-            ),
-          ],
+              //save changes button
+              Center(
+                child: Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: FilledButton(
+                    onPressed: () {},
+                    child: const Text('Save Changes'),
+                  ),
+                ),
+              ),
+              //delete account button and modal functionality
+              Center(
+                child: Padding(
+                  padding: EdgeInsets.only(top: 40.0, bottom: 20.0),
+                  child: FilledButton(
+                    onPressed: () => showDialog<String>(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                        title: Text(
+                            'Are you sure you want to delete your account?',
+                            style: Theme.of(context).textTheme.titleSmall),
+                        // content: Text(''),
+                        actions: <Widget>[
+                          FilledButton(
+                            onPressed: () => Navigator.pop(context, 'Cancel'),
+                            child: const Text('Cancel'),
+                          ),
+                          FilledButton(
+                            onPressed: () => Navigator.pop(context, 'OK'),
+                            child: const Text('Delete Account'),
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  WidgetStateProperty.all(Colors.red),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    style: ButtonStyle(
+                      backgroundColor: WidgetStateProperty.all(Colors.red),
+                    ),
+                    child: const Text('Delete Account'),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

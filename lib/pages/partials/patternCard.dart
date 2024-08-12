@@ -1,8 +1,9 @@
-// ignore_for_file: prefer_const_constructors
-
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:my_app/coreFunctionality/core.dart';
+import 'package:my_app/coreFunctionality/models/comment.dart';
 import 'package:my_app/coreFunctionality/models/pattern.dart';
+import 'package:my_app/pages/partials/commentCard.dart';
 
 class PatternCard extends StatefulWidget {
   final Pattern pattern;
@@ -13,6 +14,22 @@ class PatternCard extends StatefulWidget {
 }
 
 class _PatternCardState extends State<PatternCard> {
+  //function to return a patterns comments
+  List<Widget> buildComments() {
+    List<dynamic> commentsList = jsonDecode(
+        '[{"id": 5,"pattern_id": 2,"user_id": 2,"comment_body": "look at this comment","user_name": "darcy"},{"id": 6,"pattern_id": 2,    "user_id": 4,"comment_body": "second comment","user_name":"chrispy"},{"id": 7,"pattern_id": 2,"user_id": 2,"comment_body": "look at this comment1","user_name": "darcy"},{"id": 8,"pattern_id": 2,"user_id": 2,"comment_body": "look at this comment2","user_name": "darcy"},{"id": 9,"pattern_id": 2,"user_id": 2,"comment_body": "look at this comment3","user_name": "darcy"}]');
+    //create an empty list of widgets
+    List<Widget> commentWidgets = <Widget>[];
+    //iterate over the comments and add them to a comments card
+    commentsList.forEach((commentMap) {
+      Comment comment = Comment.fromJson(commentMap as Map<String, dynamic>);
+      commentWidgets.add(CommentCard(
+        comment: comment,
+      ));
+    });
+    return commentWidgets;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -56,8 +73,11 @@ class _PatternCardState extends State<PatternCard> {
                     builder: (BuildContext context) => AlertDialog(
                       title: Text('Comments',
                           style: Theme.of(context).textTheme.titleLarge),
-                      content: Text('There are no comments yet',
-                          style: Theme.of(context).textTheme.titleSmall),
+                      content: SingleChildScrollView(
+                        child: Column(
+                          children: this.buildComments(),
+                        ),
+                      ),
                       actions: <Widget>[
                         FilledButton(
                           onPressed: () => Navigator.pop(context, 'Close'),
