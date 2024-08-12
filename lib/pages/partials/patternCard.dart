@@ -14,6 +14,10 @@ class PatternCard extends StatefulWidget {
 }
 
 class _PatternCardState extends State<PatternCard> {
+  //initialising the icon colour variables for fave and like icon
+  late Color? favIconColor = Theme.of(context).iconTheme.color;
+  late Color? likeIconColor = Theme.of(context).iconTheme.color;
+
   //function to return a patterns comments
   List<Widget> buildComments() {
     List<dynamic> commentsList = jsonDecode(
@@ -32,6 +36,9 @@ class _PatternCardState extends State<PatternCard> {
 
   @override
   Widget build(BuildContext context) {
+    //calling the color variables
+    favIconColor;
+    likeIconColor;
     return Center(
       child: Card(
         child: Column(
@@ -42,6 +49,10 @@ class _PatternCardState extends State<PatternCard> {
                 widget.pattern.patternName,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
+              subtitle: Text(
+                'Posted by ', // author here
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -49,21 +60,45 @@ class _PatternCardState extends State<PatternCard> {
                 //star icon
                 Padding(
                   padding: EdgeInsets.all(10.0),
-                  child: Icon(
-                    Icons.star,
+                  child: IconButton(
                     color: Theme.of(context).iconTheme.color,
-                    //sizing up from theme for better look
-                    size: 28.0,
+                    icon: Icon(
+                      Icons.star,
+                      color: favIconColor,
+                      size: 26,
+                    ),
+                    //changing the icon colours based on clicked
+                    onPressed: () {
+                      setState(() {
+                        if (favIconColor == Theme.of(context).iconTheme.color) {
+                          favIconColor = Colors.indigo.shade900;
+                        } else {
+                          favIconColor = Theme.of(context).iconTheme.color;
+                        }
+                      });
+                    },
                   ),
                 ),
                 //thumbs up icon
                 Padding(
                   padding: EdgeInsets.all(10.0),
-                  child: Icon(
-                    Icons.thumb_up,
-                    color: Theme.of(context).iconTheme.color,
-                    //sizing up from theme for better look
-                    size: 26.0,
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.thumb_up,
+                      color: likeIconColor,
+                      size: 24,
+                    ),
+                    //changing the icon colours based on clicked
+                    onPressed: () {
+                      setState(() {
+                        if (likeIconColor ==
+                            Theme.of(context).iconTheme.color) {
+                          likeIconColor = Colors.indigo.shade900;
+                        } else {
+                          likeIconColor = Theme.of(context).iconTheme.color;
+                        }
+                      });
+                    },
                   ),
                 ),
                 //chat bubble icon with modal functionality

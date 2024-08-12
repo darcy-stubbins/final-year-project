@@ -93,7 +93,6 @@ class _AppState extends State<App> {
           //icon themes
           iconTheme: IconThemeData(
             color: primaryColor.shade50,
-            size: 24.0,
           ),
         ),
 
