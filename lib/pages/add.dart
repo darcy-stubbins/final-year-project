@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class Add extends StatefulWidget {
   const Add({super.key});
@@ -8,6 +9,12 @@ class Add extends StatefulWidget {
 }
 
 class _AddState extends State<Add> {
+  //image picker functionality for seleting a PDF
+  Future getPDF() async {
+    final XFile? pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +55,9 @@ class _AddState extends State<Add> {
               child: Padding(
                 padding: EdgeInsets.all(20.0),
                 child: FilledButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    getPDF();
+                  },
                   child: const Text('Select a PDF'),
                 ),
               ),

@@ -73,6 +73,7 @@ class _PatternCardState extends State<PatternCard> {
                     builder: (BuildContext context) => AlertDialog(
                       title: Text('Comments',
                           style: Theme.of(context).textTheme.titleLarge),
+                      //making it scrollable
                       content: SingleChildScrollView(
                         child: Column(
                           children: this.buildComments(),
