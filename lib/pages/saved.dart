@@ -15,7 +15,7 @@ class _SavedState extends State<Saved> {
   List<Widget> buildSavedPatterns() {
     //decoding the json
     List<dynamic> patterns = jsonDecode(
-        '[{"id": 1,"pattern_name": "pattern 1","pdf_path": "https://mycoolpatternpdf.com"},{"id": 2,"pattern_name": "pattern 2","pdf_path": "https://mycoolpatternpdf.com"}]');
+        '[{"id": 1,"pattern_name": "mycoolpattern1","pdf_path": "bsdhbgjsbgjbs","user_name": "chripy"},{"id": 3,"pattern_name": "mycoolpattern3","pdf_path": "bsdhbgjsbgjbs","user_name": "chripy"},{"id": 7,"pattern_name": "mycoolpattern7","pdf_path": "bsdhbgjsbgjbs","user_name": "deeeeeeeee"}]');
     //create empty widget list
     List<Widget> widgets = <Widget>[];
     //loop that will get each pattern and add it to a pattern card

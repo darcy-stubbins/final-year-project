@@ -14,7 +14,7 @@ class _HomeState extends State<Home> {
   //function to return patterns for the homepage
   List<Widget> buildPatterns() {
     List<dynamic> patterns = jsonDecode(
-        '[{"id": 1,"pattern_name": "pattern 1","pdf_path": "https://mycoolpatternpdf.com "},{"id": 2,"pattern_name": "pattern 2","pdf_path": "https://mycoolpatternpdf.com "},{"id": 3,"pattern_name": "pattern 3","pdf_path": "https://mycoolpattern123pdf.com "},{"id": 4,"pattern_name": "pattern 4","pdf_path": "https://mycoolpattern123456789pdf.com "},{"id": 5,"pattern_name": "pattern 5","pdf_path": "bsdhbgjsbgjbs"},{"id": 6,"pattern_name": "pattern 6","pdf_path": "bsdhbgjsbgjbs"},{"id": 7,"pattern_name": "pattern 7","pdf_path": "bsdhbgjsbgjbs"}]');
+        '[{"id": 1,"pattern_name": "mycoolpattern1","user_id": 2,"pdf_path": "bsdhbgjsbgjbs","user_name": "chripy"},{"id": 2,"pattern_name": "mycoolpattern2","user_id": 2,"pdf_path": "bsdhbgjsbgjbs","user_name": "chripy"},{"id": 3,"pattern_name": "mycoolpattern3","user_id": 2,"pdf_path": "bsdhbgjsbgjbs","user_name": "chripy"},{"id": 4,"pattern_name": "mycoolpattern4","user_id": 1,"pdf_path": "bsdhbgjsbgjbs","user_name": "deeeeeeeee"},{"id": 5,"pattern_name": "mycoolpattern5","user_id": 3,"pdf_path": "bsdhbgjsbgjbs","user_name": "user123"},{"id": 6,"pattern_name": "mycoolpattern6","user_id": 3,"pdf_path": "bsdhbgjsbgjbs","user_name": "user123"},{"id": 7,"pattern_name": "mycoolpattern7","user_id": 1,"pdf_path": "bsdhbgjsbgjbs","user_name": "deeeeeeeee"}]');
     //create an empty list of widgets
     List<Widget> patternWidgets = <Widget>[];
     //loop that will get each pattern and add it to a pattern card

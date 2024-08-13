@@ -50,7 +50,7 @@ class _PatternCardState extends State<PatternCard> {
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               subtitle: Text(
-                'Posted by ', // author here
+                'Posted by ' + widget.pattern.patternAuthor,
                 style: Theme.of(context).textTheme.titleSmall,
               ),
             ),
