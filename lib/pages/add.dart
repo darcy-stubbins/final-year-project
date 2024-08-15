@@ -1,5 +1,8 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:file_picker/file_picker.dart';
 
 class Add extends StatefulWidget {
   const Add({super.key});
@@ -9,10 +12,21 @@ class Add extends StatefulWidget {
 }
 
 class _AddState extends State<Add> {
-  //image picker functionality for seleting a PDF
-  Future getPDF() async {
-    final XFile? pickedFile =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
+  var fileName = '';
+  //file picker functionality for seleting a PDF
+  Future<String> getPDF() async {
+    FilePickerResult? selectorResult = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf'],
+    );
+
+    if (selectorResult != null) {
+      Uint8List fileBytes = selectorResult.files.first.bytes as Uint8List;
+      String fileName = selectorResult.files.first.name;
+      return fileName;
+    } else {
+      return 'No file selected';
+    }
   }
 
   @override
@@ -55,10 +69,20 @@ class _AddState extends State<Add> {
               child: Padding(
                 padding: EdgeInsets.all(20.0),
                 child: FilledButton(
-                  onPressed: () {
-                    getPDF();
+                  onPressed: () async {
+                    fileName = await getPDF();
+                    setState(() {});
                   },
-                  child: const Text('Select a PDF'),
+                  child: const Text("Select a PDF"),
+                ),
+              ),
+            ),
+            Center(
+              child: Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Text(
+                  'filename: ' + fileName,
+                  style: Theme.of(context).textTheme.titleSmall,
                 ),
               ),
             ),

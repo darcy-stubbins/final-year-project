@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:my_app/pages/partials/patternCard.dart';
 import 'package:my_app/coreFunctionality/models/pattern.dart';
+import 'package:http/http.dart' as http;
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -11,7 +12,22 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  //function to return patterns for the homepage
+  // Future<String> fetchTest() async {
+  //   print('firing');
+  //   final response =
+  //       await http.get(Uri.parse("http://192.168.0.8/pattern/show-all"));
+  //   print(response.body);
+  //   return response.body;
+  // }
+
+  //calling the api with a network request
+  // Future<List<Widget>> fetchPatterns(http.Client client) async {
+  //   final response = await client
+  //       .get(Uri.parse('https://crafting-app.com/pattern/show-all'));
+  //   return buildPatterns(response.body);
+  // }
+
+  // function to return patterns for the homepage
   List<Widget> buildPatterns() {
     List<dynamic> patterns = jsonDecode(
         '[{"id": 1,"pattern_name": "mycoolpattern1","user_id": 2,"pdf_path": "bsdhbgjsbgjbs","user_name": "chripy"},{"id": 2,"pattern_name": "mycoolpattern2","user_id": 2,"pdf_path": "bsdhbgjsbgjbs","user_name": "chripy"},{"id": 3,"pattern_name": "mycoolpattern3","user_id": 2,"pdf_path": "bsdhbgjsbgjbs","user_name": "chripy"},{"id": 4,"pattern_name": "mycoolpattern4","user_id": 1,"pdf_path": "bsdhbgjsbgjbs","user_name": "deeeeeeeee"},{"id": 5,"pattern_name": "mycoolpattern5","user_id": 3,"pdf_path": "bsdhbgjsbgjbs","user_name": "user123"},{"id": 6,"pattern_name": "mycoolpattern6","user_id": 3,"pdf_path": "bsdhbgjsbgjbs","user_name": "user123"},{"id": 7,"pattern_name": "mycoolpattern7","user_id": 1,"pdf_path": "bsdhbgjsbgjbs","user_name": "deeeeeeeee"}]');
