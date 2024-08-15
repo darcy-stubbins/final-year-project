@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:my_app/coreFunctionality/models/user.dart';
@@ -22,10 +23,28 @@ class _ProfileState extends State<Profile> {
     return user;
   }
 
-  //image picker functionality
-  Future getImage() async {
-    final XFile? pickedFile =
+  //initilaising the profilepicture to be the placeholder
+  Widget chosenImage = Image.asset(
+    'assets/images/placeholder.jpg',
+    fit: BoxFit.fill,
+  );
+
+  //image picker functionality to select a profile image
+  Future<Widget> getImage() async {
+    final XFile? selectedImage =
         await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    if (selectedImage != null) {
+      return Image.network(
+        selectedImage.path,
+        fit: BoxFit.fill,
+      );
+    } else {
+      return Image.asset(
+        'assets/images/placeholder.jpg',
+        fit: BoxFit.fill,
+      );
+    }
   }
 
   @override
@@ -50,10 +69,7 @@ class _ProfileState extends State<Profile> {
                   width: 350,
                   padding: const EdgeInsets.only(
                       left: 50.0, top: 10.0, right: 50.0, bottom: 10.0),
-                  child: Image.asset(
-                    'assets/images/placeholder.jpg',
-                    fit: BoxFit.fill,
-                  ),
+                  child: chosenImage,
                 ),
               ),
               //select profile pic button
@@ -61,8 +77,9 @@ class _ProfileState extends State<Profile> {
                 child: Padding(
                   padding: EdgeInsets.only(bottom: 10.0),
                   child: FilledButton(
-                    onPressed: () {
-                      getImage();
+                    onPressed: () async {
+                      chosenImage = await getImage();
+                      setState(() {});
                     },
                     child: const Text('Select a New Profile Picture'),
                   ),
