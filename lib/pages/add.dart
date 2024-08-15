@@ -23,7 +23,7 @@ class _AddState extends State<Add> {
     if (selectorResult != null) {
       Uint8List fileBytes = selectorResult.files.first.bytes as Uint8List;
       String fileName = selectorResult.files.first.name;
-      return fileName;
+      return 'filename: ' + fileName;
     } else {
       return 'No file selected';
     }
@@ -81,7 +81,7 @@ class _AddState extends State<Add> {
               child: Padding(
                 padding: EdgeInsets.all(10.0),
                 child: Text(
-                  'filename: ' + fileName,
+                  fileName,
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
               ),
