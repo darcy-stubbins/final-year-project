@@ -1,5 +1,7 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:my_app/coreFunctionality/core.dart';
+import 'package:pdfrx/pdfrx.dart';
 
 class PatternDetails extends StatefulWidget {
   const PatternDetails({super.key});
@@ -9,6 +11,13 @@ class PatternDetails extends StatefulWidget {
 }
 
 class _PatternDetailsState extends State<PatternDetails> {
+  //returing the patterns PDF
+  Widget getPDF() {
+    var pdf = PdfViewer.asset('assets/PDFs/dictionary.pdf');
+    return pdf;
+  }
+
+  //counter logic
   int _counter = 0;
 
   //+ counter
@@ -94,10 +103,7 @@ class _PatternDetailsState extends State<PatternDetails> {
               padding: EdgeInsets.only(top: 20.0),
               height: 600,
               width: 350,
-              child: Image.asset(
-                'assets/images/pdf-placeholder.jpg',
-                fit: BoxFit.fill,
-              ),
+              child: getPDF(),
             ),
           ),
           counter,

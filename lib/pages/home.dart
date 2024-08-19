@@ -12,25 +12,28 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  // Future<String> fetchTest() async {
-  //   print('firing');
-  //   final response =
-  //       await http.get(Uri.parse("http://192.168.0.8/pattern/show-all"));
-  //   print(response.body);
-  //   return response.body;
-  // }
-
-  //calling the api with a network request
-  // Future<List<Widget>> fetchPatterns(http.Client client) async {
-  //   final response = await client
-  //       .get(Uri.parse('https://crafting-app.com/pattern/show-all'));
-  //   return buildPatterns(response.body);
-  // }
-
   // function to return patterns for the homepage
   List<Widget> buildPatterns() {
+    //hard coded json response as a list
     List<dynamic> patterns = jsonDecode(
         '[{"id": 1,"pattern_name": "mycoolpattern1","user_id": 2,"pdf_path": "bsdhbgjsbgjbs","user_name": "chripy"},{"id": 2,"pattern_name": "mycoolpattern2","user_id": 2,"pdf_path": "bsdhbgjsbgjbs","user_name": "chripy"},{"id": 3,"pattern_name": "mycoolpattern3","user_id": 2,"pdf_path": "bsdhbgjsbgjbs","user_name": "chripy"},{"id": 4,"pattern_name": "mycoolpattern4","user_id": 1,"pdf_path": "bsdhbgjsbgjbs","user_name": "deeeeeeeee"},{"id": 5,"pattern_name": "mycoolpattern5","user_id": 3,"pdf_path": "bsdhbgjsbgjbs","user_name": "user123"},{"id": 6,"pattern_name": "mycoolpattern6","user_id": 3,"pdf_path": "bsdhbgjsbgjbs","user_name": "user123"},{"id": 7,"pattern_name": "mycoolpattern7","user_id": 1,"pdf_path": "bsdhbgjsbgjbs","user_name": "deeeeeeeee"}]');
+    //iterating over the list and checking if pattern_name matches the given query
+    patterns = patterns.where((pattern) {
+      Map<String, dynamic> castedPattern = pattern as Map<String, dynamic>;
+      bool containsQuery = castedPattern['pattern_name'].contains(query);
+      return containsQuery;
+    }).toList();
+
+    //http json response
+    // final response = await http
+    //   .post(
+    //      Uri.parse('https://127.0.0.1/pattern/search'),
+    //      body: jsonEncode(<String, String>{
+    //        'search_term': this.query,
+    //      })
+    //    );
+    // List<dynamic> patterns = jsonDecode(response.body);
+
     //create an empty list of widgets
     List<Widget> patternWidgets = <Widget>[];
     //loop that will get each pattern and add it to a pattern card
@@ -39,29 +42,21 @@ class _HomeState extends State<Home> {
       patternWidgets.add(PatternCard(pattern: pattern));
     });
     //returning the list of pattern cards
+    print(this.query);
     return patternWidgets;
   }
 
-  //search bar functionality
-  List<String> options = [
-    'One',
-    'Two',
-    'Three',
-    'Four',
-  ];
-
-  List<String> searchResults = [];
+  String query = '';
 
   void searchBarChanged(String query) {
     setState(() {
-      searchResults = options
-          .where((item) => item.toLowerCase().contains(query.toLowerCase()))
-          .toList();
+      this.query = query;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> matchedPatterns = buildPatterns();
     return Scaffold(
       // appBar: AppBar(
       //   title: const Text('Home'),
@@ -100,7 +95,7 @@ class _HomeState extends State<Home> {
               ),
               Column(
                 //pattern card displaying
-                children: this.buildPatterns(),
+                children: matchedPatterns,
               ),
             ],
           ),
