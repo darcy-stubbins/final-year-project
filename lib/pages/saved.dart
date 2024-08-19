@@ -16,6 +16,12 @@ class _SavedState extends State<Saved> {
     //decoding the json
     List<dynamic> patterns = jsonDecode(
         '[{"id": 1,"pattern_name": "mycoolpattern1","pdf_path": "bsdhbgjsbgjbs","user_name": "chripy"},{"id": 3,"pattern_name": "mycoolpattern3","pdf_path": "bsdhbgjsbgjbs","user_name": "chripy"},{"id": 7,"pattern_name": "mycoolpattern7","pdf_path": "bsdhbgjsbgjbs","user_name": "deeeeeeeee"}]');
+
+    //http json request
+    // final response = await http
+    // .get(Uri.parse('https://127.0.0.1/user/get-saved-patterns'));
+    // return Widget.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+
     //create empty widget list
     List<Widget> widgets = <Widget>[];
     //loop that will get each pattern and add it to a pattern card
@@ -30,7 +36,6 @@ class _SavedState extends State<Saved> {
   @override
   Widget build(BuildContext context) {
     buildSavedPatterns();
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,

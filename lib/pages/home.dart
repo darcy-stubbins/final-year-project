@@ -24,7 +24,7 @@ class _HomeState extends State<Home> {
       return containsQuery;
     }).toList();
 
-    //http json response
+    //http json request
     // final response = await http
     //   .post(
     //      Uri.parse('https://127.0.0.1/pattern/search'),
@@ -58,9 +58,6 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     List<Widget> matchedPatterns = buildPatterns();
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Home'),
-      // ),
       body: SingleChildScrollView(
         child: Container(
           margin: const EdgeInsets.all(20.0),
