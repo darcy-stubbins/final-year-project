@@ -22,6 +22,12 @@ class _PatternCardState extends State<PatternCard> {
   List<Widget> buildComments() {
     List<dynamic> commentsList = jsonDecode(
         '[{"id": 5,"pattern_id": 2,"user_id": 2,"comment_body": "look at this comment","user_name": "darcy"},{"id": 6,"pattern_id": 2,    "user_id": 4,"comment_body": "second comment","user_name":"chrispy"},{"id": 7,"pattern_id": 2,"user_id": 2,"comment_body": "look at this comment1","user_name": "darcy"},{"id": 8,"pattern_id": 2,"user_id": 2,"comment_body": "look at this comment2","user_name": "darcy"},{"id": 9,"pattern_id": 2,"user_id": 2,"comment_body": "look at this comment3","user_name": "darcy"}]');
+
+    //http json request
+    // final response = await http
+    // .get(Uri.parse('https://127.0.0.1/pattern/get-pattern-comments'));
+    // return Widget.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+
     //create an empty list of widgets
     List<Widget> commentWidgets = <Widget>[];
     //iterate over the comments and add them to a comments card

@@ -14,17 +14,16 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   // function to return patterns for the homepage
   List<Widget> buildPatterns() {
-    //hard coded json response as a list
+    //hard coded json response
     List<dynamic> patterns = jsonDecode(
         '[{"id": 1,"pattern_name": "mycoolpattern1","user_id": 2,"pdf_path": "bsdhbgjsbgjbs","user_name": "chripy"},{"id": 2,"pattern_name": "mycoolpattern2","user_id": 2,"pdf_path": "bsdhbgjsbgjbs","user_name": "chripy"},{"id": 3,"pattern_name": "mycoolpattern3","user_id": 2,"pdf_path": "bsdhbgjsbgjbs","user_name": "chripy"},{"id": 4,"pattern_name": "mycoolpattern4","user_id": 1,"pdf_path": "bsdhbgjsbgjbs","user_name": "deeeeeeeee"},{"id": 5,"pattern_name": "mycoolpattern5","user_id": 3,"pdf_path": "bsdhbgjsbgjbs","user_name": "user123"},{"id": 6,"pattern_name": "mycoolpattern6","user_id": 3,"pdf_path": "bsdhbgjsbgjbs","user_name": "user123"},{"id": 7,"pattern_name": "mycoolpattern7","user_id": 1,"pdf_path": "bsdhbgjsbgjbs","user_name": "deeeeeeeee"}]');
-    //iterating over the list and checking if pattern_name matches the given query
     patterns = patterns.where((pattern) {
       Map<String, dynamic> castedPattern = pattern as Map<String, dynamic>;
-      bool containsQuery = castedPattern['pattern_name'].contains(query);
-      return containsQuery;
+
+      return castedPattern['pattern_name'].contains(query);
     }).toList();
 
-    //http json request
+    //http json response
     // final response = await http
     //   .post(
     //      Uri.parse('https://127.0.0.1/pattern/search'),
@@ -42,7 +41,6 @@ class _HomeState extends State<Home> {
       patternWidgets.add(PatternCard(pattern: pattern));
     });
     //returning the list of pattern cards
-    print(this.query);
     return patternWidgets;
   }
 
@@ -57,6 +55,13 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     List<Widget> matchedPatterns = buildPatterns();
+
+    //returns 'nothing found' if no patterns are found
+    if (matchedPatterns.length == 0) {
+      matchedPatterns.add(Text('nothing found',
+          style: Theme.of(context).textTheme.titleMedium));
+    }
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
