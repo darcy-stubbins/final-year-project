@@ -17,6 +17,7 @@ class _HomeState extends State<Home> {
     //hard coded json response
     List<dynamic> patterns = jsonDecode(
         '[{"id": 1,"pattern_name": "mycoolpattern1","user_id": 2,"pdf_path": "bsdhbgjsbgjbs","user_name": "chripy"},{"id": 2,"pattern_name": "mycoolpattern2","user_id": 2,"pdf_path": "bsdhbgjsbgjbs","user_name": "chripy"},{"id": 3,"pattern_name": "mycoolpattern3","user_id": 2,"pdf_path": "bsdhbgjsbgjbs","user_name": "chripy"},{"id": 4,"pattern_name": "mycoolpattern4","user_id": 1,"pdf_path": "bsdhbgjsbgjbs","user_name": "deeeeeeeee"},{"id": 5,"pattern_name": "mycoolpattern5","user_id": 3,"pdf_path": "bsdhbgjsbgjbs","user_name": "user123"},{"id": 6,"pattern_name": "mycoolpattern6","user_id": 3,"pdf_path": "bsdhbgjsbgjbs","user_name": "user123"},{"id": 7,"pattern_name": "mycoolpattern7","user_id": 1,"pdf_path": "bsdhbgjsbgjbs","user_name": "deeeeeeeee"}]');
+    //checking if the pattern_name matches the passed in query from the user
     patterns = patterns.where((pattern) {
       Map<String, dynamic> castedPattern = pattern as Map<String, dynamic>;
 
@@ -44,6 +45,7 @@ class _HomeState extends State<Home> {
     return patternWidgets;
   }
 
+  //the passed in query(search bar)
   String query = '';
 
   void searchBarChanged(String query) {
@@ -58,7 +60,7 @@ class _HomeState extends State<Home> {
 
     //returns 'nothing found' if no patterns are found
     if (matchedPatterns.length == 0) {
-      matchedPatterns.add(Text('nothing found',
+      matchedPatterns.add(Text('Sorry, nothing found',
           style: Theme.of(context).textTheme.titleMedium));
     }
 

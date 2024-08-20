@@ -21,12 +21,16 @@ class _PatternCardState extends State<PatternCard> {
   //function to return a patterns comments
   List<Widget> buildComments() {
     List<dynamic> commentsList = jsonDecode(
-        '[{"id": 5,"pattern_id": 2,"user_id": 2,"comment_body": "look at this comment","user_name": "darcy"},{"id": 6,"pattern_id": 2,    "user_id": 4,"comment_body": "second comment","user_name":"chrispy"},{"id": 7,"pattern_id": 2,"user_id": 2,"comment_body": "look at this comment1","user_name": "darcy"},{"id": 8,"pattern_id": 2,"user_id": 2,"comment_body": "look at this comment2","user_name": "darcy"},{"id": 9,"pattern_id": 2,"user_id": 2,"comment_body": "look at this comment3","user_name": "darcy"}]');
+        '[{"id": 5,"pattern_id": 2,"user_id": 2,"comment_body": "look at this comment","user_name": "darcy"},{"id": 6,"pattern_id": 2,    "user_id": 4,"comment_body": "second comment","user_name":"chrispy"},{"id": 7,"pattern_id": 2,"user_id": 2,"comment_body": "look at this comment1","user_name": "darcy"},{"id": 8,"pattern_id": 2,"user_id": 2,"comment_body": "look at this comment2","user_name": "darcy"},{"id": 9,"pattern_id": 2,"user_id": 6,"comment_body": "look at this comment3","user_name": "darcy"},{"id": 9,"pattern_id": 3,"user_id": 2,"comment_body": "look at this comment3","user_name": "darcy"}]');
+    commentsList = commentsList.where((comment) {
+      Map<String, dynamic> castedComment = comment as Map<String, dynamic>;
+      return castedComment['pattern_id'] == this.widget.pattern.id;
+    }).toList();
 
     //http json request
     // final response = await http
     // .get(Uri.parse('https://127.0.0.1/pattern/get-pattern-comments'));
-    // return Widget.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+    // List<dynamic> commentsList = Widget.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
 
     //create an empty list of widgets
     List<Widget> commentWidgets = <Widget>[];
@@ -42,6 +46,13 @@ class _PatternCardState extends State<PatternCard> {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> matchedComments = buildComments();
+
+    if (matchedComments.length == 0) {
+      matchedComments.add(Text('Sorry, no comments found',
+          style: Theme.of(context).textTheme.titleSmall));
+    }
+
     //calling the color variables
     favIconColor;
     likeIconColor;
@@ -117,7 +128,7 @@ class _PatternCardState extends State<PatternCard> {
                       //making it scrollable
                       content: SingleChildScrollView(
                         child: Column(
-                          children: this.buildComments(),
+                          children: matchedComments,
                         ),
                       ),
                       actions: <Widget>[
