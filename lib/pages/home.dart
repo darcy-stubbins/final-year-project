@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:my_app/pages/partials/patternCard.dart';
 import 'package:my_app/coreFunctionality/models/pattern.dart';
-import 'package:http/http.dart' as http;
+// import 'package:http/http.dart' as http;
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -16,15 +16,17 @@ class _HomeState extends State<Home> {
   List<Widget> buildPatterns() {
     //hard coded json response
     List<dynamic> patterns = jsonDecode(
-        '[{"id": 1,"pattern_name": "mycoolpattern1","user_id": 2,"pdf_path": "bsdhbgjsbgjbs","user_name": "chripy"},{"id": 2,"pattern_name": "mycoolpattern2","user_id": 2,"pdf_path": "bsdhbgjsbgjbs","user_name": "chripy"},{"id": 3,"pattern_name": "mycoolpattern3","user_id": 2,"pdf_path": "bsdhbgjsbgjbs","user_name": "chripy"},{"id": 4,"pattern_name": "mycoolpattern4","user_id": 1,"pdf_path": "bsdhbgjsbgjbs","user_name": "deeeeeeeee"},{"id": 5,"pattern_name": "mycoolpattern5","user_id": 3,"pdf_path": "bsdhbgjsbgjbs","user_name": "user123"},{"id": 6,"pattern_name": "mycoolpattern6","user_id": 3,"pdf_path": "bsdhbgjsbgjbs","user_name": "user123"},{"id": 7,"pattern_name": "mycoolpattern7","user_id": 1,"pdf_path": "bsdhbgjsbgjbs","user_name": "deeeeeeeee"}]');
+        '[{"id": 1,"pattern_name": "Jumper Pattern","user_id": 1,"pdf_path": "dictionary.pdf","user_name": "Darcy Stubbins"},{"id": 2,"pattern_name": "Dress Pattern","user_id": 1,"pdf_path": "dictionary.pdf","user_name": "Darcy Stubbins"},{"id": 3,"pattern_name": "Dress Pattern with Bow","user_id": 3,"pdf_path": "dictionary.pdf","user_name": "Jane Doe"},{"id": 4,"pattern_name": "Fleece Pattern","user_id": 3,"pdf_path": "dictionary.pdf","user_name": "Jane Doe"},{"id": 5,"pattern_name": "Knitted Vest","user_id": 6,"pdf_path": "dictionary.pdf","user_name": "Steve Stubbins"},{"id": 6,"pattern_name": "Crocheted Mini Dress","user_id": 7,"pdf_path": "dictionary.pdf","user_name": "John Smith"},{"id": 7,"pattern_name": "Tie (no sewing machine method)","user_id": 7,"pdf_path": "dictionary.pdf","user_name": "John Smith"},{"id": 8,"pattern_name": "Autumn Themed Blanket (single bed size)","user_id": 10,"pdf_path": "dictionary.pdf","user_name": "Sue Stubbins"},{"id": 9,"pattern_name": "Autumn Themed Blanket (double bed size)","user_id": 10,"pdf_path": "dictionary.pdf","user_name": "Sue Stubbins"},{"id": 10,"pattern_name": "Knitted Cardigan","user_id": 3,"pdf_path": "dictionary.pdf","user_name": "Jane Doe"}]');
     //checking if the pattern_name matches the passed in query from the user
     patterns = patterns.where((pattern) {
       Map<String, dynamic> castedPattern = pattern as Map<String, dynamic>;
 
-      return castedPattern['pattern_name'].contains(query);
+      return castedPattern['pattern_name'].toLowerCase().contains(query);
     }).toList();
 
-    //http json request
+    //http json request - to post the request with the inserted query as search_term and then return
+    // the response from the API function called searh in the Pattern class.
+    //
     // final response = await http
     //   .post(
     //      Uri.parse('https://127.0.0.1/pattern/search'),
@@ -50,7 +52,7 @@ class _HomeState extends State<Home> {
 
   void searchBarChanged(String query) {
     setState(() {
-      this.query = query;
+      this.query = query.toLowerCase();
     });
   }
 
