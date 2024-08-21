@@ -42,6 +42,7 @@ dependencies:
   native_pdf_view: ^4.2.0
   easy_pdf_viewer: ^1.0.8
   pdfrx: ^1.0.82
+  fluttertoast: ^8.2.8
 
 dev_dependencies:
   flutter_test:

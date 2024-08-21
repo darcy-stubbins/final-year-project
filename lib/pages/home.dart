@@ -24,7 +24,7 @@ class _HomeState extends State<Home> {
       return castedPattern['pattern_name'].contains(query);
     }).toList();
 
-    //http json response
+    //http json request
     // final response = await http
     //   .post(
     //      Uri.parse('https://127.0.0.1/pattern/search'),

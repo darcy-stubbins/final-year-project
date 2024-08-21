@@ -47,6 +47,28 @@ class _ProfileState extends State<Profile> {
     }
   }
 
+  void addFriend() {
+    print(this.query);
+
+    //http json request
+    // final response = await http
+    //   .post(
+    //      Uri.parse('https://127.0.0.1/user/add-friend'),
+    //      body: jsonEncode(<String, String>{
+    //        'friend_id': this.query,
+    //      })
+    //    );
+  }
+
+  //the passed in query(friend search bar)
+  String query = '';
+
+  void searchBarChanged(String query) {
+    setState(() {
+      this.query = query;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,15 +131,80 @@ class _ProfileState extends State<Profile> {
                   ),
                 ),
               ),
-              //save changes button
-              Center(
-                child: Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: FilledButton(
-                    onPressed: () {},
-                    child: const Text('Save Changes'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  //save changes button
+                  Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: FilledButton(
+                      onPressed: () {},
+                      child: const Text('Save Changes'),
+                    ),
                   ),
-                ),
+                  //add friend button with modal functionality
+                  FilledButton(
+                    onPressed: () => showDialog<String>(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                        title: Text('Search for and add frinds',
+                            style: Theme.of(context).textTheme.titleLarge),
+                        //making it scrollable
+                        content: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              TextField(
+                                style: TextStyle(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onPrimary),
+                                onChanged: searchBarChanged,
+                                decoration: InputDecoration(
+                                  hintText: "Search here",
+                                  hintStyle:
+                                      Theme.of(context).textTheme.labelMedium,
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(100.0),
+                                    borderSide: BorderSide(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary),
+                                  ),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(100.0),
+                                    borderSide: BorderSide(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary),
+                                  ),
+                                  prefixIcon: Icon(
+                                    Icons.search,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        actions: <Widget>[
+                          FilledButton(
+                            onPressed: (addFriend),
+                            child: const Text('Add friend'),
+                          ),
+                          FilledButton(
+                            onPressed: () => Navigator.pop(context, 'Close'),
+                            child: const Text('Close'),
+                          ),
+                        ],
+                      ),
+                    ),
+                    child: Icon(
+                      Icons.add,
+                      color: Theme.of(context).iconTheme.color,
+                    ),
+                  ),
+                ],
               ),
               //delete account button and modal functionality
               Center(
