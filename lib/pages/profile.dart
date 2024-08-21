@@ -75,7 +75,9 @@ class _ProfileState extends State<Profile> {
     //checking if the pattern_id passed in matches the selected pattern to return that patterns comments
     friendList = friendList.toList();
 
-    //http json request
+    //http json request - returns the current users added friends list from the API function getFriendsList
+    // from the User class.
+    //
     // final response = await http
     // .get(Uri.parse('https://127.0.0.1/user/get-friends-list'));
     // return Widget.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
