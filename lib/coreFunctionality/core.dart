@@ -68,6 +68,10 @@ class Core {
     this.changeDashboardPageIndex(4);
   }
 
+  void openCommentCard(int patternID) {
+    this.changeDashboardPageIndex(5);
+  }
+
   int? getCurrentCounterValue() {
     if (this.counters.containsKey(this.currentCounter)) {
       return this.counters[this.currentCounter];

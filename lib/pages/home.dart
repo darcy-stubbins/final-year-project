@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:my_app/coreFunctionality/api.dart';
 import 'package:my_app/pages/partials/patternCard.dart';
 import 'package:my_app/coreFunctionality/models/pattern.dart';
-// import 'package:http/http.dart' as http;
 
 class Home extends StatefulWidget {
   const Home({super.key});

@@ -5,6 +5,7 @@ import 'package:my_app/pages/patternDetails.dart';
 import 'package:my_app/pages/profile.dart';
 import 'package:my_app/pages/saved.dart';
 import 'package:my_app/pages/add.dart';
+import 'package:my_app/pages/patternComments.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -22,6 +23,7 @@ class _DashboardState extends State<Dashboard> {
     const Saved(),
     const Profile(),
     const PatternDetails(),
+    const PatternComments(),
   ];
 
 // function to set index based on what is clicked
