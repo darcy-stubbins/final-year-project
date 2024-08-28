@@ -15,22 +15,16 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   // function to return patterns for the homepage
   Future<List<Widget>> buildPatterns() async {
+    Map<String, String> data = {'search_term': query};
+
     //decoding the json (hardcoded)
     // List<dynamic> patterns = jsonDecode(
     //     '[{"id": 1,"pattern_name": "Jumper Pattern","user_id": 1,"pdf_path": "dictionary.pdf","user_name": "Darcy Stubbins"},{"id": 2,"pattern_name": "Dress Pattern","user_id": 1,"pdf_path": "dictionary.pdf","user_name": "Darcy Stubbins"},{"id": 3,"pattern_name": "Dress Pattern with Bow","user_id": 3,"pdf_path": "dictionary.pdf","user_name": "Jane Doe"},{"id": 4,"pattern_name": "Fleece Pattern","user_id": 3,"pdf_path": "dictionary.pdf","user_name": "Jane Doe"},{"id": 5,"pattern_name": "Knitted Vest","user_id": 6,"pdf_path": "dictionary.pdf","user_name": "Steve Stubbins"},{"id": 6,"pattern_name": "Crocheted Mini Dress","user_id": 7,"pdf_path": "dictionary.pdf","user_name": "John Smith"},{"id": 7,"pattern_name": "Tie (no sewing machine method)","user_id": 7,"pdf_path": "dictionary.pdf","user_name": "John Smith"},{"id": 8,"pattern_name": "Autumn Themed Blanket (single bed size)","user_id": 10,"pdf_path": "dictionary.pdf","user_name": "Sue Stubbins"},{"id": 9,"pattern_name": "Autumn Themed Blanket (double bed size)","user_id": 10,"pdf_path": "dictionary.pdf","user_name": "Sue Stubbins"},{"id": 10,"pattern_name": "Knitted Cardigan","user_id": 3,"pdf_path": "dictionary.pdf","user_name": "Jane Doe"}]');
 
     //getting the response from the API and decoding it
-    String response =
-        await Api().get('https://10.0.2.2/pattern/show-all-patterns');
+    String response = await Api().post('https://10.0.2.2/pattern/search', data);
 
     List<dynamic> patterns = jsonDecode(response);
-
-    //checking if the pattern_name matches the passed in query from the user
-    patterns = patterns.where((pattern) {
-      Map<String, dynamic> castedPattern = pattern as Map<String, dynamic>;
-
-      return castedPattern['pattern_name'].toLowerCase().contains(query);
-    }).toList();
 
     //create an empty list of widgets
     List<Widget> patternWidgets = <Widget>[];

@@ -70,6 +70,36 @@ class _PatternCommentsState extends State<PatternComments> {
                         children: matchedComments ?? [],
                       ),
                     ),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 10.0),
+                      //comment leaving section
+                      child: TextField(
+                        minLines: 1,
+                        maxLines: 8,
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.onPrimary),
+                        decoration: InputDecoration(
+                          // hintText: "Leave a comment here",
+                          hintStyle: Theme.of(context).textTheme.labelMedium,
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(100.0),
+                            borderSide: BorderSide(
+                                color: Theme.of(context).colorScheme.primary),
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(100.0),
+                            borderSide: BorderSide(
+                                color: Theme.of(context).colorScheme.primary),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: FilledButton(
+                        onPressed: () {},
+                        child: const Text('Post Comment'),
+                      ),
+                    ),
                   ],
                 ),
               ),
