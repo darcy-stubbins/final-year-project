@@ -22,6 +22,7 @@ class _SavedState extends State<Saved> {
     //getting the response from the API and decoding it
     String response =
         await Api().get('https://10.0.2.2/user/get-saved-patterns/1');
+    print(response);
 
     List<dynamic> patterns = jsonDecode(response);
 
@@ -30,7 +31,7 @@ class _SavedState extends State<Saved> {
     //loop that will get each pattern and add it to a pattern card
     patterns.forEach((patternMap) {
       Pattern pattern = Pattern.fromJson(patternMap as Map<String, dynamic>);
-      widgets.add(PatternCard(pattern: pattern));
+      widgets.add(PatternCard(pattern: pattern, saved: patternMap['saved']));
     });
 
     if (widgets.length == 0) {

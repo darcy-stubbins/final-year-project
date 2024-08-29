@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:my_app/coreFunctionality/api.dart';
 import 'package:my_app/coreFunctionality/core.dart';
 import 'package:my_app/coreFunctionality/models/comment.dart';
 import 'package:my_app/coreFunctionality/models/pattern.dart';
@@ -7,7 +8,8 @@ import 'package:my_app/pages/partials/commentCard.dart';
 
 class PatternCard extends StatefulWidget {
   final Pattern pattern;
-  const PatternCard({super.key, required this.pattern});
+  int? saved;
+  PatternCard({super.key, required this.pattern, this.saved});
 
   @override
   State<PatternCard> createState() => _PatternCardState();
@@ -20,9 +22,11 @@ class _PatternCardState extends State<PatternCard> {
 
   @override
   Widget build(BuildContext context) {
-    //calling the color variables
-    favIconColor;
-    likeIconColor;
+    if (widget.saved == 1) {
+      favIconColor = Colors.indigo.shade900;
+    } else {
+      favIconColor = Theme.of(context).iconTheme.color;
+    }
     return Center(
       child: Card(
         child: Column(
@@ -54,7 +58,13 @@ class _PatternCardState extends State<PatternCard> {
                     //changing the icon colours based on clicked
                     onPressed: () {
                       setState(() {
-                        if (favIconColor == Theme.of(context).iconTheme.color) {
+                        //hitting the api
+                        Api().post('https://10.0.2.2/user/post-save-pattern', {
+                          'user_id': '1',
+                          'pattern_id': widget.pattern.id.toString()
+                        });
+                        widget.saved = widget.saved == 1 ? 0 : 1;
+                        if (widget.saved == 1) {
                           favIconColor = Colors.indigo.shade900;
                         } else {
                           favIconColor = Theme.of(context).iconTheme.color;

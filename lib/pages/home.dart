@@ -15,7 +15,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   // function to return patterns for the homepage
   Future<List<Widget>> buildPatterns() async {
-    Map<String, String> data = {'search_term': query};
+    Map<String, String> data = {'search_term': query, 'user_id': '1'};
 
     //decoding the json (hardcoded)
     // List<dynamic> patterns = jsonDecode(
@@ -31,7 +31,8 @@ class _HomeState extends State<Home> {
     //loop that will get each pattern and add it to a pattern card
     patterns.forEach((patternMap) {
       Pattern pattern = Pattern.fromJson(patternMap as Map<String, dynamic>);
-      patternWidgets.add(PatternCard(pattern: pattern));
+      patternWidgets
+          .add(PatternCard(pattern: pattern, saved: patternMap['saved']));
     });
     //returning the list of pattern cards
     return patternWidgets;
