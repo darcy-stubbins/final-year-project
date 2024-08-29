@@ -27,6 +27,7 @@ class Api {
       HttpClientResponse response = await request.close();
       String responseBody = await response.transform(utf8.decoder).join();
       if (response.statusCode == HttpStatus.ok) {
+        print(responseBody);
         return responseBody;
       }
     } catch (e) {

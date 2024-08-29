@@ -31,8 +31,10 @@ class _HomeState extends State<Home> {
     //loop that will get each pattern and add it to a pattern card
     patterns.forEach((patternMap) {
       Pattern pattern = Pattern.fromJson(patternMap as Map<String, dynamic>);
-      patternWidgets
-          .add(PatternCard(pattern: pattern, saved: patternMap['saved']));
+      patternWidgets.add(PatternCard(
+          pattern: pattern,
+          saved: patternMap['saved'],
+          liked: patternMap['liked']));
     });
     //returning the list of pattern cards
     return patternWidgets;

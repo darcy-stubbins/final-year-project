@@ -9,7 +9,8 @@ import 'package:my_app/pages/partials/commentCard.dart';
 class PatternCard extends StatefulWidget {
   final Pattern pattern;
   int? saved;
-  PatternCard({super.key, required this.pattern, this.saved});
+  int? liked;
+  PatternCard({super.key, required this.pattern, this.saved, this.liked});
 
   @override
   State<PatternCard> createState() => _PatternCardState();
@@ -22,10 +23,17 @@ class _PatternCardState extends State<PatternCard> {
 
   @override
   Widget build(BuildContext context) {
+    //save icon
     if (widget.saved == 1) {
       favIconColor = Colors.indigo.shade900;
     } else {
       favIconColor = Theme.of(context).iconTheme.color;
+    }
+    //like icon
+    if (widget.liked == 1) {
+      likeIconColor = Colors.indigo.shade900;
+    } else {
+      likeIconColor = Theme.of(context).iconTheme.color;
     }
     return Center(
       child: Card(
@@ -45,7 +53,7 @@ class _PatternCardState extends State<PatternCard> {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                //star icon
+                //star icon (saved)
                 Padding(
                   padding: EdgeInsets.all(10.0),
                   child: IconButton(
@@ -73,7 +81,7 @@ class _PatternCardState extends State<PatternCard> {
                     },
                   ),
                 ),
-                //thumbs up icon
+                //thumbs up icon (liked)
                 Padding(
                   padding: EdgeInsets.all(10.0),
                   child: IconButton(
@@ -85,8 +93,14 @@ class _PatternCardState extends State<PatternCard> {
                     //changing the icon colours based on clicked
                     onPressed: () {
                       setState(() {
-                        if (likeIconColor ==
-                            Theme.of(context).iconTheme.color) {
+                        //hitting the api
+                        Api().post(
+                            'https://10.0.2.2/pattern/post-pattern-like', {
+                          'user_id': '1',
+                          'pattern_id': widget.pattern.id.toString()
+                        });
+                        widget.liked = widget.liked == 1 ? 0 : 1;
+                        if (widget.liked == 1) {
                           likeIconColor = Colors.indigo.shade900;
                         } else {
                           likeIconColor = Theme.of(context).iconTheme.color;
