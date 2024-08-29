@@ -2,6 +2,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:my_app/coreFunctionality/core.dart';
 import 'package:pdfrx/pdfrx.dart';
+import 'dart:async';
+import 'package:flutter/widgets.dart';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
 class PatternDetails extends StatefulWidget {
   const PatternDetails({super.key});

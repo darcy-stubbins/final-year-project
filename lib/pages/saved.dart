@@ -21,7 +21,7 @@ class _SavedState extends State<Saved> {
 
     //getting the response from the API and decoding it
     String response =
-        await Api().get('https://10.0.2.2/user/get-saved-patterns/2');
+        await Api().get('https://10.0.2.2/user/get-saved-patterns/1');
 
     List<dynamic> patterns = jsonDecode(response);
 

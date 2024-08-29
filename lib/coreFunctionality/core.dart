@@ -9,6 +9,7 @@ class Core {
   bool displayCounter = false;
   final Map<int, int> counters = HashMap();
   int currentCounter = 0;
+  int currentPatternId = 0;
   late Function changeAppState;
 
   static Core singleton = Core._();
@@ -41,6 +42,10 @@ class Core {
     return dashboardPageIndex;
   }
 
+  int getCurrentPatternId() {
+    return currentPatternId;
+  }
+
   void login() {
     loggedIn = LoginController.login();
     changeAppState();
@@ -69,6 +74,7 @@ class Core {
   }
 
   void openCommentCard(int patternID) {
+    this.currentPatternId = patternID;
     this.changeDashboardPageIndex(5);
   }
 
@@ -82,6 +88,11 @@ class Core {
 
   void createCounter() {
     this.counters[this.currentCounter] = 0;
+    changeAppState();
+  }
+
+  void changePatternId(int patternId) {
+    this.currentPatternId = patternId;
     changeAppState();
   }
 }
