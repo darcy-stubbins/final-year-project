@@ -7,6 +7,7 @@ import 'package:my_app/coreFunctionality/models/comment.dart';
 import 'package:my_app/pages/partials/commentCard.dart';
 import 'package:my_app/pages/partials/patternCard.dart';
 import 'package:my_app/coreFunctionality/models/pattern.dart';
+import 'package:pdfrx/pdfrx.dart';
 
 class PatternComments extends StatefulWidget {
   const PatternComments({super.key});
@@ -40,11 +41,14 @@ class _PatternCommentsState extends State<PatternComments> {
   }
 
   void postComment() async {
+    if (commentBody.isEmpty) {
+      return;
+    }
     Map<String, String> data = {
       'comment_body': this.commentBody,
       'pattern_id': Core.getInstance().getCurrentPatternId().toString(),
       //hardoded user as no login system
-      'user_id': '2'
+      'user_id': '1'
     };
     //hitting the api
     String response =
@@ -95,7 +99,7 @@ class _PatternCommentsState extends State<PatternComments> {
                     Padding(
                       padding: EdgeInsets.only(bottom: 10.0),
                       //comment leaving section
-                      child: TextField(
+                      child: TextFormField(
                         onChanged: commentBodyChange,
                         minLines: 1,
                         maxLines: 8,
