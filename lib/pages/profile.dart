@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:my_app/coreFunctionality/api.dart';
 import 'package:my_app/coreFunctionality/models/user.dart';
 // import 'package:http/http.dart' as http;
 
@@ -70,23 +71,23 @@ class _ProfileState extends State<Profile> {
     });
   }
 
-  List<Widget> getFriendsList() {
-    List<dynamic> friendList = jsonDecode(
-        '[{"id": 2,"user_name": "John Doe","user_email": "john@mail.com","user_password": "xYYo.qAVBjVKV2qtxuMMm6/sQyH1RxNTzrTaLmbb3Ntug18D."},{"id": 4,"user_name": "Chris Curtis","user_email": "Chris@mail.com","user_password": "mv8vVspeE4msI9EhgsgCIuTV2WcN94DILKq4Aad44oIN6vIuqkg96"},{"id": 8,"user_name": "Adam Smith","user_email": "Adam123@mail.com","user_password": "3zqt8DloLe5Z1UN5ODqYAbDBnMQE9/l9iGEUTAKtmYn2efae"},{"id": 9,"user_name": "Susan Smith","user_email": "Susan99@mail.com","user_password": "lmmnFphwizJV4fpSTDs6ejqmr8EOW840KIwroJmkqs42W6W3GVeG"}]');
-    //checking if the pattern_id passed in matches the selected pattern to return that patterns comments
-    friendList = friendList.toList();
+  Future<List<Widget>> buildFriendsList() async {
+    //decoding the json (hardcoded)
+    // List<dynamic> friendList = jsonDecode(
+    //     '[{"id": 2,"user_name": "John Doe","user_email": "john@mail.com","user_password": "xYYo.qAVBjVKV2qtxuMMm6/sQyH1RxNTzrTaLmbb3Ntug18D."},{"id": 4,"user_name": "Chris Curtis","user_email": "Chris@mail.com","user_password": "mv8vVspeE4msI9EhgsgCIuTV2WcN94DILKq4Aad44oIN6vIuqkg96"},{"id": 8,"user_name": "Adam Smith","user_email": "Adam123@mail.com","user_password": "3zqt8DloLe5Z1UN5ODqYAbDBnMQE9/l9iGEUTAKtmYn2efae"},{"id": 9,"user_name": "Susan Smith","user_email": "Susan99@mail.com","user_password": "lmmnFphwizJV4fpSTDs6ejqmr8EOW840KIwroJmkqs42W6W3GVeG"}]');
 
-    //http json request - returns the current users added friends list from the API function getFriendsList
-    // from the User class.
-    //
-    // final response = await http
-    // .get(Uri.parse('https://127.0.0.1/user/get-friends-list'));
-    // return Widget.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+    //hitting the api (user is hardcoded as no login system)
+    String response =
+        await Api().get('https://10.0.2.2/user/get-friends-list/2');
+
+    List<dynamic> friends = jsonDecode(response);
+
+    friends = friends.toList();
 
     //create an empty list of widgets
     List<Widget> friendWidgets = <Widget>[];
     //iterate over the friends and add them to friendsWidgets
-    friendList.forEach((friendMap) {
+    friends.forEach((friendMap) {
       User friend = User.fromJson(friendMap as Map<String, dynamic>);
       friendWidgets.add(Text(
         friend.userName,
@@ -98,7 +99,6 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> friendList = getFriendsList();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -298,12 +298,31 @@ class _ProfileState extends State<Profile> {
                       ),
                     ),
                     Center(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: friendList,
+                      child: FutureBuilder<List<Widget>>(
+                        future: buildFriendsList(),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<List<Widget>> snapshot) {
+                          if (!snapshot.hasData) {
+                            // while data is loading:
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          } else {
+                            //returns 'nothing found' if no patterns are found
+                            List<Widget> friendsList = snapshot.data ?? [];
+
+                            // data loaded:
+                            return Center(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: friendsList ?? [],
+                              ),
+                            );
+                          }
+                        },
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
