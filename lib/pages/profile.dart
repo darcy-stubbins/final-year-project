@@ -169,7 +169,11 @@ class _ProfileState extends State<Profile> {
                         padding:
                             EdgeInsets.only(top: 5.0, left: 10.0, right: 10.0),
                         child: FilledButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Api().postMutliPartFile(
+                                'https://10.0.2.2/user/post-profile-picture',
+                                {'string': 'string'});
+                          },
                           child: const Text('Save Changes'),
                         ),
                       ),

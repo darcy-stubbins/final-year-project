@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class Api {
   //post to the api
@@ -21,9 +23,7 @@ class Api {
       request.headers.set(HttpHeaders.contentTypeHeader,
           "application/x-www-form-urlencoded; charset=UTF-8");
 
-      // request.write(urlEncodedData);
       request.write(urlEncodedData);
-      // print(urlEncodedData);
       HttpClientResponse response = await request.close();
       String responseBody = await response.transform(utf8.decoder).join();
       if (response.statusCode == HttpStatus.ok) {
