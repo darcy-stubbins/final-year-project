@@ -40,7 +40,7 @@ flutter run lib/main.dart
 
 ## Limitations and known issues 
 
-* There is currently no PDF upload support for the pattern upload section and is currently out-of-use, there is however viewing capablities shown with an example pdf
-* There is currently no support for uploading a profile picture in the Profile section and is out-of-use,however again, there are viewing capablities and device file access is availible. 
+* There is currently no PDF upload support for the pattern upload section and is currently out-of-use, there is however viewing capabilities shown with an example PDF
+* There is currently no support for uploading a profile picture in the Profile section and is out-of-use,however again, there are viewing capabilities and device file access is available. 
 * Currently the counters within each pattern will not persist any stored count data but are functional within an instance
 
