@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:my_app/coreFunctionality/api.dart';
+import 'package:my_app/coreFunctionality/core.dart';
 import 'package:my_app/coreFunctionality/models/user.dart';
-// import 'package:http/http.dart' as http;
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -14,17 +14,6 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  //function to return the user that is logged in
-  User getLoggedInUser() {
-    //decoding the json
-    Map<String, dynamic> userMap = jsonDecode(
-        '{"id": 1, "user_name": "chrispy","user_email": "chrispy@mail.com","user_password": "password"}');
-    //assign the given json to user and return it
-    User user = User.fromJson(userMap);
-
-    return user;
-  }
-
   //initilaising the profilepicture to be the placeholder
   Widget chosenImage = Image.asset(
     'assets/images/placeholder.jpg',
@@ -49,36 +38,48 @@ class _ProfileState extends State<Profile> {
     }
   }
 
-  void addFriend() {
-    //http json request - to post the request to add a friend taking the inserted
-    // query as the friend_id for the API function addFriend in the User class.
-    //
-    // final response = await http
-    //   .post(
-    //      Uri.parse('https://127.0.0.1/user/add-friend'),
-    //      body: jsonEncode(<String, String>{
-    //        'friend_id': this.query,
-    //      })
-    //    );
+  //function to add a friend via their username
+  void addFriend() async {
+    Map<String, String> data = {'friend_request': friendSearch};
+
+    String response = await Api().post(
+        '${Core.getInstance().apiEndpoint.toString()}user/add-friend', data);
   }
 
   //the passed in query(friend search bar)
-  String query = '';
+  String friendSearch = '';
 
-  void searchBarChanged(String query) {
+  void searchBarChanged(String friendSearch) {
     setState(() {
-      this.query = query;
+      this.friendSearch = friendSearch;
+    });
+  }
+
+  //function to update the users user name
+  void updateUserName() async {
+    Map<String, String> data = {'update_name': updatedName};
+
+    String response = await Api().post(
+        '${Core.getInstance().apiEndpoint.toString()}user/update-user-name',
+        data);
+
+    Map<String, String> newUserName = jsonDecode(response);
+  }
+
+  //the passed in query(friend search bar)
+  String updatedName = '';
+
+  void nameUpdated(String updatedName) {
+    setState(() {
+      this.updatedName = updatedName;
     });
   }
 
   Future<List<Widget>> buildFriendsList() async {
-    //decoding the json (hardcoded)
-    // List<dynamic> friendList = jsonDecode(
-    //     '[{"id": 2,"user_name": "John Doe","user_email": "john@mail.com","user_password": "xYYo.qAVBjVKV2qtxuMMm6/sQyH1RxNTzrTaLmbb3Ntug18D."},{"id": 4,"user_name": "Chris Curtis","user_email": "Chris@mail.com","user_password": "mv8vVspeE4msI9EhgsgCIuTV2WcN94DILKq4Aad44oIN6vIuqkg96"},{"id": 8,"user_name": "Adam Smith","user_email": "Adam123@mail.com","user_password": "3zqt8DloLe5Z1UN5ODqYAbDBnMQE9/l9iGEUTAKtmYn2efae"},{"id": 9,"user_name": "Susan Smith","user_email": "Susan99@mail.com","user_password": "lmmnFphwizJV4fpSTDs6ejqmr8EOW840KIwroJmkqs42W6W3GVeG"}]');
-
     //hitting the api (user is hardcoded as no login system)
-    String response =
-        await Api().get('https://10.0.2.2/user/get-friends-list/2');
+    String response = await Api().post(
+        '${Core.getInstance().apiEndpoint.toString()}user/get-friends-list',
+        {});
 
     List<dynamic> friends = jsonDecode(response);
 
@@ -148,8 +149,9 @@ class _ProfileState extends State<Profile> {
                       padding: const EdgeInsets.only(
                           bottom: 20.0, left: 20.0, right: 20.0),
                       child: TextFormField(
+                        onChanged: nameUpdated,
                         decoration: InputDecoration(
-                          hintText: this.getLoggedInUser().userName,
+                          hintText: 'Username',
                           hintStyle: Theme.of(context).textTheme.labelLarge,
                         ),
                         validator: (String? value) {
@@ -169,7 +171,9 @@ class _ProfileState extends State<Profile> {
                         padding:
                             EdgeInsets.only(top: 5.0, left: 10.0, right: 10.0),
                         child: FilledButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            updateUserName();
+                          },
                           child: const Text('Save Changes'),
                         ),
                       ),
@@ -247,34 +251,10 @@ class _ProfileState extends State<Profile> {
                     child: Padding(
                       padding: EdgeInsets.only(top: 40.0, bottom: 20.0),
                       child: FilledButton(
-                        onPressed: () => showDialog<String>(
-                          context: context,
-                          builder: (BuildContext context) => AlertDialog(
-                            title: Text(
-                                'Are you sure you want to delete your account?',
-                                style: Theme.of(context).textTheme.titleSmall),
-                            // content: Text(''),
-                            actions: <Widget>[
-                              FilledButton(
-                                onPressed: () =>
-                                    Navigator.pop(context, 'Cancel'),
-                                child: const Text('Cancel'),
-                              ),
-                              FilledButton(
-                                onPressed: () => Navigator.pop(context, 'OK'),
-                                child: const Text('Delete Account'),
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      WidgetStateProperty.all(Colors.red),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        style: ButtonStyle(
-                          backgroundColor: WidgetStateProperty.all(Colors.red),
-                        ),
-                        child: const Text('Delete Account'),
+                        onPressed: () {
+                          Core.getInstance().logout();
+                        },
+                        child: const Text('Logout'),
                       ),
                     ),
                   ),

@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:my_app/coreFunctionality/api.dart';
 import 'package:my_app/coreFunctionality/core.dart';
 
 class Register extends StatefulWidget {
@@ -9,6 +12,60 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  //function to post the form off to the api to create a user
+  void postRegister() async {
+    //checking the confirmed password
+    if (password != confirmedPassword) {
+      return;
+    }
+
+    Map<String, String> data = {
+      'user_name': name,
+      'user_email': email,
+      'user_password': password
+    };
+
+    String response = await Api().post(
+        '${Core.getInstance().apiEndpoint.toString()}user/create-user', data);
+
+    Map<String, dynamic> createdResponse = jsonDecode(response);
+    if (createdResponse['success']) {
+      Core.getInstance().changeLoginRoutePageIndex(0);
+    } else {
+      print(createdResponse);
+    }
+  }
+
+  //the passed in email and password
+  String name = '';
+  String email = '';
+  String password = '';
+  String confirmedPassword = '';
+
+  void nameChanged(String name) {
+    setState(() {
+      this.name = name;
+    });
+  }
+
+  void emailChanged(String email) {
+    setState(() {
+      this.email = email.toLowerCase();
+    });
+  }
+
+  void passwordChanged(String password) {
+    setState(() {
+      this.password = password;
+    });
+  }
+
+  void confirmedPasswordChanged(String confirmedPassword) {
+    setState(() {
+      this.confirmedPassword = confirmedPassword;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,6 +89,7 @@ class _RegisterState extends State<Register> {
                       ),
                       //name input
                       TextFormField(
+                        onChanged: nameChanged,
                         decoration: InputDecoration(
                           hintText: 'Name',
                           hintStyle: Theme.of(context).textTheme.labelLarge,
@@ -45,6 +103,7 @@ class _RegisterState extends State<Register> {
                       ),
                       //email input
                       TextFormField(
+                        onChanged: emailChanged,
                         decoration: InputDecoration(
                           hintText: 'Email',
                           hintStyle: Theme.of(context).textTheme.labelLarge,
@@ -58,6 +117,7 @@ class _RegisterState extends State<Register> {
                       ),
                       //password input
                       TextFormField(
+                        onChanged: passwordChanged,
                         decoration: InputDecoration(
                           hintText: 'Password',
                           hintStyle: Theme.of(context).textTheme.labelLarge,
@@ -71,6 +131,7 @@ class _RegisterState extends State<Register> {
                       ),
                       //confirm password input
                       TextFormField(
+                        onChanged: confirmedPasswordChanged,
                         decoration: InputDecoration(
                           hintText: 'Confirm password',
                           hintStyle: Theme.of(context).textTheme.labelLarge,
@@ -89,6 +150,7 @@ class _RegisterState extends State<Register> {
                             padding: EdgeInsets.all(10.0),
                             child: FilledButton(
                               onPressed: () {
+                                postRegister();
                                 Core.getInstance().changeLoginRoutePageIndex(2);
                               },
                               child: const Text('Create account'),

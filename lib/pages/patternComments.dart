@@ -19,13 +19,10 @@ class PatternComments extends StatefulWidget {
 class _PatternCommentsState extends State<PatternComments> {
   // function to return comments associated with the opened pattern
   Future<List<Widget>> buildComments() async {
-    //decoding the json (hardcoded)
-    // List<dynamic> comments = jsonDecode(
-    //     '[{"id": 1,"pattern_id": 2,"user_id": 3,"comment_body": "Lorem ipsum odor amet, consectetuer adipiscing elit.","user_name": "Jane Doe"},{"id": 2,"pattern_id": 2,"user_id": 5,"comment_body": "Lorem ipsum odor amet, consectetuer adipiscing elit. Velit ornare integer, fringilla fames montes rutrum dolor. Arcu dapibus sagittis proin vitae tempus neque fusce. Mauris dictum netus efficitur dis at sapien. Viverra nisi maecenas conubia taciti scelerisque at elementum. Vulputate primis molestie fermentum neque ex phasellus. Condimentum iaculis posuere mus etiam ante parturient primis mus. Facilisi tempor inceptos ultrices velit conubia venenatis. Dapibus lectus hendrerit ac finibus ultrices auctor.","user_name": "Dee Stubbins"},{"id": 3,"pattern_id": 8,"user_id": 5,"comment_body": "Lorem ipsum odor amet, consectetuer adipiscing elit. Finibus cras id cras pellentesque integer dolor ultricies dis. Nisl duis urna lacus lacinia mauris purus.","user_name": "Dee Stubbins"},{"id": 4,"pattern_id": 1,"user_id": 1,"comment_body": "Lorem ipsum odor amet, consectetuer adipiscing elit. Finibus cras id cras pellentesque integer dolor ultricies dis. Nisl duis urna lacus lacinia mauris purus.","user_name": "Darcy Stubbins"},{"id": 5,"pattern_id": 5,"user_id": 7,"comment_body": "Lorem ipsum odor amet, consectetuer adipiscing elit.","user_name": "John Smith"},{"id": 6,"pattern_id": 5,"user_id": 8,"comment_body": "Lorem ipsum odor amet, consectetuer adipiscing elit.","user_name": "Adam Smith"},{"id": 7,"pattern_id": 9,"user_id": 1,"comment_body": "Lorem ipsum odor amet, consectetuer adipiscing elit. Pharetra inceptos congue erat montes mi morbi ridiculus donec pellentesque.","user_name": "Darcy Stubbins"},{"id": 8,"pattern_id": 2,"user_id": 2,"comment_body": "Lorem ipsum odor amet, consectetuer adipiscing elit. Pharetra inceptos congue erat montes mi morbi ridiculus donec pellentesque.","user_name": "John Doe"},{"id": 9,"pattern_id": 3,"user_id": 5,"comment_body": "Lorem ipsum odor amet, consectetuer adipiscing elit. Auctor odio vestibulum laoreet, sagittis tincidunt senectus efficitur senectus. Cras dignissim at eget eget, consectetur litora erat. Convallis nam at magna blandit mi. Sapien augue suspendisse metus metus adipiscing in nascetur faucibus. Nunc himenaeos enim dui nunc praesent diam purus potenti. Auctor erat cursus ullamcorper, ligula tempor eget. Ullamcorper cursus conubia, augue eros tortor conubia. Ridiculus hac mus inceptos non malesuada commodo nibh. Quisque himenaeos maximus convallis velit facilisis tincidunt torquent dui.","user_name": "Dee Stubbins"},{"id": 10,"pattern_id": 3,"user_id": 2,"comment_body": "Lorem ipsum odor amet, consectetuer adipiscing elit. Auctor odio vestibulum laoreet, sagittis tincidunt senectus efficitur senectus. Cras dignissim at eget eget, consectetur litora erat. Convallis nam at magna blandit mi. Sapien augue suspendisse metus metus adipiscing in nascetur faucibus. Nunc himenaeos enim dui nunc praesent diam purus potenti. Auctor erat cursus ullamcorper, ligula tempor eget. Ullamcorper cursus conubia, augue eros tortor conubia. Ridiculus hac mus inceptos non malesuada commodo nibh. Quisque himenaeos maximus convallis velit facilisis tincidunt torquent dui.","user_name": "John Doe"}]');
-
     //hitting the api
-    String response = await Api().get(
-        'https://10.0.2.2/pattern/get-pattern-comments/${Core.getInstance().getCurrentPatternId().toString()}');
+    String response = await Api().post(
+        '${Core.getInstance().apiEndpoint.toString()}pattern/get-pattern-comments/${Core.getInstance().getCurrentPatternId().toString()}',
+        {});
 
     List<dynamic> comments = jsonDecode(response);
 
@@ -51,8 +48,9 @@ class _PatternCommentsState extends State<PatternComments> {
       'user_id': '1'
     };
     //hitting the api
-    String response =
-        await Api().post('https://10.0.2.2/pattern/post-pattern-comment', data);
+    String response = await Api().post(
+        '${Core.getInstance().apiEndpoint.toString()}pattern/post-pattern-comment',
+        data);
   }
 
   //the passed in query(search bar)

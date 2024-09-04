@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:my_app/coreFunctionality/api.dart';
 import 'package:my_app/coreFunctionality/core.dart';
 
 class Login extends StatefulWidget {
@@ -9,6 +12,37 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  //fucntion to post the user to the api to complete checks to log user in
+  void postLogin() async {
+    Map<String, String> data = {'user_email': email, 'user_password': password};
+
+    String response = await Api()
+        .post('${Core.getInstance().apiEndpoint.toString()}auth/login', data);
+
+    Map<String, dynamic> loginResponse = jsonDecode(response);
+    if (loginResponse['success']) {
+      Core.getInstance().login(loginResponse['token']);
+    } else {
+      print(loginResponse);
+    }
+  }
+
+  //the passed in email and password
+  String email = '';
+  String password = '';
+
+  void emailChanged(String email) {
+    setState(() {
+      this.email = email.toLowerCase();
+    });
+  }
+
+  void passwordChanged(String password) {
+    setState(() {
+      this.password = password;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,6 +72,7 @@ class _LoginState extends State<Login> {
                       padding: EdgeInsets.only(left: 5.0, right: 5.0),
                       //email field
                       child: TextFormField(
+                        onChanged: emailChanged,
                         decoration: InputDecoration(
                           hintText: 'Enter your email',
                           hintStyle: Theme.of(context).textTheme.labelLarge,
@@ -55,6 +90,7 @@ class _LoginState extends State<Login> {
                           EdgeInsets.only(left: 5.0, right: 5.0, bottom: 10.0),
                       //password field
                       child: TextFormField(
+                        onChanged: passwordChanged,
                         decoration: InputDecoration(
                           hintText: 'Enter your password',
                           hintStyle: Theme.of(context).textTheme.labelLarge,
@@ -74,7 +110,7 @@ class _LoginState extends State<Login> {
                           padding: EdgeInsets.all(5.0),
                           child: FilledButton(
                             onPressed: () {
-                              Core.getInstance().login();
+                              postLogin();
                             },
                             child: const Text('Submit'),
                           ),

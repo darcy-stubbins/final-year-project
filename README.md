@@ -4,7 +4,7 @@ Please ensure you read *both* this read.me and the corresponding read.me for the
 
 ## Features 
 
-* Login/account creation portal* 
+* Login/account creation portal
 * A bottom navigation bar with four different tabs to navigate around the app, including: 
     * Home page
     * Pattern upload section* 
@@ -28,6 +28,7 @@ Android and iOS (and web __if not__ consuming the local API)
 
 * Android SDK to run the Flutter Emulator, read more and download [here](https://developer.android.com/studio/install?gad_source=1&gclid=Cj0KCQjw28W2BhC7ARIsAPerrcLG96yx9NzG_xwg0tyV3cFF3MwA9PRpBaV84sWI2VznmkeC0HqPjpgaAuziEALw_wcB&gclsrc=aw.ds).
 * Docker to run the containers for the API (only required if consuming the API through this app), read more and download [here](https://www.docker.com/products/docker-desktop/). 
+* Meow SQL to view and run the database creation queries (only required if consuming the API through this app), read more and download [here](https://appimage.github.io/MeowSQL/).
 
 ## Installation 
 
@@ -39,9 +40,7 @@ flutter run lib/main.dart
 
 ## Limitations and known issues 
 
-* At this moment there is no login/sign-up system in place beyond the frontend design
-* There is currently no PDF upload support for the pattern upload section and is currently out-of-use
-* There is currently no support for uploading a profile picture in the Profile section and is out-of-use
-* Currently no availability to upload and/or view a PDF besides the 'placeholder' PDF
+* There is currently no PDF upload support for the pattern upload section and is currently out-of-use, there is however viewing capablities shown with an example pdf
+* There is currently no support for uploading a profile picture in the Profile section and is out-of-use,however again, there are viewing capablities and device file access is availible. 
 * Currently the counters within each pattern will not persist any stored count data but are functional within an instance
 

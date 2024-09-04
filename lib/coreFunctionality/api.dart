@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:my_app/coreFunctionality/core.dart';
 
 class Api {
   //post to the api
@@ -10,9 +11,7 @@ class Api {
     data.forEach((key, value) {
       urlEncodedData += key + '=' + value + '&';
     });
-    List<String> dataChars = urlEncodedData.split("");
-    dataChars.removeLast();
-    urlEncodedData = dataChars.join();
+    urlEncodedData += 'token=' + Core.getInstance().getToken();
     try {
       HttpClient httpClient = new HttpClient();
       httpClient.badCertificateCallback =
@@ -27,7 +26,6 @@ class Api {
       HttpClientResponse response = await request.close();
       String responseBody = await response.transform(utf8.decoder).join();
       if (response.statusCode == HttpStatus.ok) {
-        print(responseBody);
         return responseBody;
       }
     } catch (e) {

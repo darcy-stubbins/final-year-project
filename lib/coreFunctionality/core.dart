@@ -1,7 +1,5 @@
 import 'dart:collection';
 
-import 'package:my_app/coreFunctionality/loginController.dart';
-
 class Core {
   bool loggedIn = false;
   int loginRoutePageIndex = 0;
@@ -11,6 +9,8 @@ class Core {
   int currentCounter = 0;
   int currentPatternId = 0;
   late Function changeAppState;
+  String token = '';
+  String apiEndpoint = 'https://10.0.2.2/';
 
   static Core singleton = Core._();
 
@@ -46,8 +46,19 @@ class Core {
     return currentPatternId;
   }
 
-  void login() {
-    loggedIn = LoginController.login();
+  String getToken() {
+    return token;
+  }
+
+  void login(String token) {
+    this.token = token;
+    loggedIn = true;
+    changeAppState();
+  }
+
+  void logout() {
+    this.token = '';
+    loggedIn = false;
     changeAppState();
   }
 

@@ -67,10 +67,12 @@ class _PatternCardState extends State<PatternCard> {
                     onPressed: () {
                       setState(() {
                         //hitting the api
-                        Api().post('https://10.0.2.2/user/post-save-pattern', {
-                          'user_id': '1',
-                          'pattern_id': widget.pattern.id.toString()
-                        });
+                        Api().post(
+                            '${Core.getInstance().apiEndpoint.toString()}user/post-save-pattern',
+                            {
+                              'user_id': '1',
+                              'pattern_id': widget.pattern.id.toString()
+                            });
                         widget.saved = widget.saved == 1 ? 0 : 1;
                         if (widget.saved == 1) {
                           favIconColor = Colors.indigo.shade900;
@@ -95,10 +97,11 @@ class _PatternCardState extends State<PatternCard> {
                       setState(() {
                         //hitting the api
                         Api().post(
-                            'https://10.0.2.2/pattern/post-pattern-like', {
-                          'user_id': '1',
-                          'pattern_id': widget.pattern.id.toString()
-                        });
+                            '${Core.getInstance().apiEndpoint.toString()}pattern/post-pattern-like',
+                            {
+                              'user_id': '1',
+                              'pattern_id': widget.pattern.id.toString()
+                            });
                         widget.liked = widget.liked == 1 ? 0 : 1;
                         if (widget.liked == 1) {
                           likeIconColor = Colors.indigo.shade900;

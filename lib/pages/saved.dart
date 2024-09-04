@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:my_app/coreFunctionality/api.dart';
+import 'package:my_app/coreFunctionality/core.dart';
 import 'package:my_app/coreFunctionality/models/pattern.dart';
 import 'package:my_app/pages/partials/patternCard.dart';
 
@@ -15,13 +16,10 @@ class Saved extends StatefulWidget {
 class _SavedState extends State<Saved> {
   //function to return saved patterns in a list of pattern cards
   Future<List<Widget>> buildSavedPatterns() async {
-    //decoding the json (hardcoded)
-    // List<dynamic> patterns = jsonDecode(
-    //     '[{"id": 3,"pattern_name": "Dress Pattern with Bow ","pdf_path": "dictionary.pdf","user_name": "Jane Doe"},{"id": 7,"pattern_name": "Tie (no sewing machine method)","pdf_path": "dictionary.pdf","user_name": "John Smith"},{"id": 10,"pattern_name": "Knitted Cardigan","pdf_path": "dictionary.pdf","user_name": "Jane Doe"}]');
-
     //getting the response from the API and decoding it
-    String response =
-        await Api().get('https://10.0.2.2/user/get-saved-patterns/1');
+    String response = await Api().post(
+        '${Core.getInstance().apiEndpoint.toString()}user/get-saved-patterns',
+        {});
     print(response);
 
     List<dynamic> patterns = jsonDecode(response);

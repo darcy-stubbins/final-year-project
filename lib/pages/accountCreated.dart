@@ -42,7 +42,7 @@ class _AccountCreated extends State<AccountCreated> {
                             padding: EdgeInsets.all(10.0),
                             child: FilledButton(
                               onPressed: () {
-                                Core.getInstance().login();
+                                Core.getInstance().changeLoginRoutePageIndex(0);
                               },
                               child: const Text('Login with your new account'),
                             ),
