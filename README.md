@@ -28,7 +28,6 @@ Android and iOS (and web __if not__ consuming the local API)
 
 * Android SDK to run the Flutter Emulator, read more and download [here](https://developer.android.com/studio/install?gad_source=1&gclid=Cj0KCQjw28W2BhC7ARIsAPerrcLG96yx9NzG_xwg0tyV3cFF3MwA9PRpBaV84sWI2VznmkeC0HqPjpgaAuziEALw_wcB&gclsrc=aw.ds).
 * Docker to run the containers for the API (only required if consuming the API through this app), read more and download [here](https://www.docker.com/products/docker-desktop/). 
-* Meow SQL to view and run the database creation queries (only required if consuming the API through this app), read more and download [here](https://appimage.github.io/MeowSQL/).
 
 ## Installation 
 
